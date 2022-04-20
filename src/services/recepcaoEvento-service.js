@@ -16,7 +16,7 @@ const EVENTO = {
 }
 class RecepcaoEvento {
   constructor(opt) {
-    const { requestOptions = {}, httpsOptions = {} } = opt.options
+    const { requestOptions = {}, httpsOptions = {} } = opt.options || {}
 
     let cert = opt.cert || ""
     let key = opt.key || ""
@@ -65,7 +65,7 @@ class RecepcaoEvento {
     this.httpsOptions = httpsOptions
   }
 
-  enviarEvento({ tipoEvento = 210210, justificativa = "" }) {
+  enviarEvento({ tipoEvento = 210210, justificativa = "" } = {}) {
     if (!EVENTO[tipoEvento]) {
       throw new Error(
         "Tipo Evento deve conter um dos valores: 210200, 210210, 210220 ou 210240"
@@ -79,7 +79,7 @@ class RecepcaoEvento {
     const timezone = this.timezone
     const nSeqEvento = this.nSeqEvento
     const cOrgao = this.cOrgao
-    const { tpEvento, descEvento } = EVENTO[dadosXml.tipoEvento]
+    const { tpEvento, descEvento } = EVENTO[tipoEvento]
     const infEventoId = `ID${tpEvento}${chNFe}01`
     const dhEvento = moment().tz(timezone).format("YYYY-MM-DD[T]HH:mm:ssZ")
 
@@ -94,6 +94,8 @@ class RecepcaoEvento {
       descEvento: descEvento,
       infEventoId: infEventoId,
       dhEvento: dhEvento,
+      cert: this.cert,
+      key: this.key,
     }
 
     if (Number(tipoEvento) === 210240) {

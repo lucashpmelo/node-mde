@@ -62,7 +62,7 @@ exports.schema = (options) => {
                   {
                     type: "element",
                     name: "infEvento",
-                    attributes: { Id: infEventoId },
+                    attributes: { Id: options.infEventoId },
                     elements: [
                       {
                         type: "element",

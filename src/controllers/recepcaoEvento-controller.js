@@ -62,7 +62,7 @@ exports.enviar = async (opt, requestOpt, httpsOpt) => {
   return retorno
 }
 
-async function montarRetorno(data) {
+function montarRetorno(data) {
   try {
     const json = xml2json(data)
 

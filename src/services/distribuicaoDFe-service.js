@@ -5,7 +5,7 @@ const { convertPFX, zeroPad } = require("../util")
 
 class DistribuicaoDFe {
   constructor(opt) {
-    const { requestOptions = {}, httpsOptions = {} } = opt.options
+    const { requestOptions = {}, httpsOptions = {} } = opt.options || {}
 
     let cert = opt.cert || ""
     let key = opt.key || ""
