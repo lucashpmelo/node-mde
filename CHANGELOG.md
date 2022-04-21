@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Otimizado código de comunicação com o Web Service
+
 ## [0.1.0] / 2022-04-20
 
 ### Adicionado

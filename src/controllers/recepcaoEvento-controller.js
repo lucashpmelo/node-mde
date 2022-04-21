@@ -11,13 +11,14 @@ const URL = {
   2: "https://hom.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl",
 }
 
-exports.enviar = async (opt, requestOpt, httpsOpt) => {
-  const baseURL = URL[opt.tpAmb]
+exports.enviar = async (opts) => {
+  const { requestOpt, httpsOpt } = opts
+  const baseURL = URL[opts.tpAmb]
 
   const AgentOptions = Object.assign(
     {
-      cert: opt.cert,
-      key: opt.key,
+      cert: opts.cert,
+      key: opts.key,
     },
     { ...httpsOpt }
   )
@@ -37,9 +38,9 @@ exports.enviar = async (opt, requestOpt, httpsOpt) => {
     { ...requestOpt }
   )
 
-  const schema = schemaRecepcaoEvento.schema(opt)
+  const schema = schemaRecepcaoEvento.schema(opts)
   const xml = json2xml(schema)
-  const xmlSign = assinaturaXml(opt.cert, opt.key, xml)
+  const xmlSign = assinaturaXml(opts.cert, opts.key, xml)
   const data = enveloparXml(xmlSign)
 
   const options = {

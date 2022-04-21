@@ -11,13 +11,14 @@ const URL = {
   2: "https://hom1.nfe.fazenda.gov.br/NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl",
 }
 
-exports.enviar = async (opt, requestOpt, httpsOpt) => {
-  const baseURL = URL[opt.tpAmb]
+exports.enviar = async (opts) => {
+  const { requestOpt, httpsOpt } = opts
+  const baseURL = URL[opts.tpAmb]
 
   const AgentOptions = Object.assign(
     {
-      cert: opt.cert,
-      key: opt.key,
+      cert: opts.cert,
+      key: opts.key,
     },
     { ...httpsOpt }
   )
@@ -37,7 +38,7 @@ exports.enviar = async (opt, requestOpt, httpsOpt) => {
     { ...requestOpt }
   )
 
-  const schema = schemaDistribuicaoDFe.schema(opt)
+  const schema = schemaDistribuicaoDFe.schema(opts)
   const xml = json2xml(schema)
   const data = enveloparXml(xml)
 

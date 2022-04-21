@@ -4,18 +4,18 @@ const controllerDistribuicaoDFe = require("../controllers/distribuicaoDFe-contro
 const { convertPFX, zeroPad } = require("../util")
 
 class DistribuicaoDFe {
-  constructor(opt) {
-    const { requestOptions = {}, httpsOptions = {} } = opt.options || {}
+  constructor(opts) {
+    const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
 
-    let cert = opt.cert || ""
-    let key = opt.key || ""
+    let cert = opts.cert || ""
+    let key = opts.key || ""
 
-    if (opt.pfx) {
-      if (!opt.passphrase) {
+    if (opts.pfx) {
+      if (!opts.passphrase) {
         throw new Error("Senha do Certificado não informada.")
       }
 
-      const pfxLoad = convertPFX(opt.pfx, opt.passphrase)
+      const pfxLoad = convertPFX(opts.pfx, opts.passphrase)
 
       cert = pfxLoad.cert
       key = pfxLoad.key
@@ -29,25 +29,27 @@ class DistribuicaoDFe {
       throw new Error("Key não informada.")
     }
 
-    if (!opt.cUFAutor) {
+    if (!opts.cUFAutor) {
       throw new Error("Codigo UF NFe não informado.")
     }
 
-    if (!opt.cnpj) {
+    if (!opts.cnpj) {
       throw new Error("CNPJ não informado.")
     }
 
-    if (!opt.tpAmb) {
+    if (!opts.tpAmb) {
       throw new Error("Ambiente não informado.")
     }
 
-    this.cUFAutor = opt.cUFAutor
-    this.cnpj = opt.cnpj
-    this.tpAmb = opt.tpAmb
-    this.cert = cert
-    this.key = key
-    this.requestOptions = requestOptions
-    this.httpsOptions = httpsOptions
+    this.opts = {
+      cUFAutor: opts.cUFAutor,
+      cnpj: opts.cnpj,
+      tpAmb: opts.tpAmb,
+      cert: cert,
+      key: key,
+      requestOpt: requestOptions,
+      httpsOpt: httpsOptions,
+    }
   }
 
   consultaPorUltNSU(ultNSU) {
@@ -65,20 +67,10 @@ class DistribuicaoDFe {
       pesquisa["valor"] = zeroPad(ultNSU, 15)
     }
 
-    const opt = {
-      pesquisa: pesquisa,
-      cUFAutor: this.cUFAutor,
-      cnpj: this.cnpj,
-      tpAmb: this.tpAmb,
-      cert: this.cert,
-      key: this.key,
-    }
+    const opts = this.opts
+    opts["pesquisa"] = pesquisa
 
-    return controllerDistribuicaoDFe.enviar(
-      opt,
-      this.requestOptions,
-      this.httpsOptions
-    )
+    return controllerDistribuicaoDFe.enviar(opts)
   }
 
   consultaPorChaveNFe(chNFe) {
@@ -98,20 +90,10 @@ class DistribuicaoDFe {
       valor: chNFe,
     }
 
-    const opt = {
-      pesquisa: pesquisa,
-      cUFAutor: this.cUFAutor,
-      cnpj: this.cnpj,
-      tpAmb: this.tpAmb,
-      cert: this.cert,
-      key: this.key,
-    }
+    const opts = this.opts
+    opts["pesquisa"] = pesquisa
 
-    return controllerDistribuicaoDFe.enviar(
-      opt,
-      this.requestOptions,
-      this.httpsOptions
-    )
+    return controllerDistribuicaoDFe.enviar(opts)
   }
 
   consultaPorNSU(nsu) {
@@ -134,20 +116,10 @@ class DistribuicaoDFe {
       valor: zeroPad(nsu, 15),
     }
 
-    const opt = {
-      pesquisa: pesquisa,
-      cUFAutor: this.cUFAutor,
-      cnpj: this.cnpj,
-      tpAmb: this.tpAmb,
-      cert: this.cert,
-      key: this.key,
-    }
+    const opts = this.opts
+    opts["pesquisa"] = pesquisa
 
-    return controllerDistribuicaoDFe.enviar(
-      opt,
-      this.requestOptions,
-      this.httpsOptions
-    )
+    return controllerDistribuicaoDFe.enviar(opts)
   }
 }
 
