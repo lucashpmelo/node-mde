@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.2.1] / 2022-04-22
+
 ### Corrigido
 
 - Types
@@ -31,5 +33,6 @@
 - - 210240 - Operação não Realizada
 
 [não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.1.0...HEAD
+[0.2.1]: https://github.com/lucashpmelo/node-mde/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/lucashpmelo/node-mde/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/lucashpmelo/node-mde/releases/tag/0.1.0
