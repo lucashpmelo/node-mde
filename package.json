@@ -1,7 +1,7 @@
 {
   "name": "node-mde",
   "version": "0.2.2",
-  "description": "Biblioteca para consultar notas destinadas e enviar evento de manifestação de destinatário",
+  "description": "Biblioteca para consultar notas destinadas e enviar evento de manifestação do destinatário",
   "main": "./index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -21,7 +21,8 @@
     "manifestação",
     "destinatário",
     "distribuição",
-    "dfe"
+    "dfe",
+    "mde"
   ],
   "author": "Lucas Melo <lucashpmelo94@gmail.com>",
   "license": "MIT",
