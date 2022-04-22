@@ -13,6 +13,9 @@ class Instance {
     this.instance = instance
   }
 
+  /**
+   * @returns {{status: number, data: string}}
+   */
   async request(options) {
     try {
       const response = await this.instance(options)

@@ -4,6 +4,19 @@ const controllerDistribuicaoDFe = require("../controllers/distribuicaoDFe-contro
 const { convertPFX, zeroPad } = require("../util")
 
 class DistribuicaoDFe {
+  /**
+   * @param {Object} opts
+   * @param {Buffer} opts.pfx
+   * @param {string} opts.passphrase
+   * @param {string} opts.cert
+   * @param {string} opts.key
+   * @param {string} opts.cUFAutor
+   * @param {string} opts.cnpj
+   * @param {string} opts.tpAmb
+   * @param {Object} opts.options
+   * @param {Object} opts.options.requestOptions
+   * @param {Object} opts.options.httpsOptions
+   */
   constructor(opts) {
     const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
 
@@ -52,6 +65,9 @@ class DistribuicaoDFe {
     }
   }
 
+  /**
+   * @param {string} ultNSU
+   */
   consultaPorUltNSU(ultNSU) {
     const pesquisa = {
       grupo: "distNSU",
@@ -73,6 +89,9 @@ class DistribuicaoDFe {
     return controllerDistribuicaoDFe.enviar(opts)
   }
 
+  /**
+   * @param {string} chNFe
+   */
   consultaPorChaveNFe(chNFe) {
     if (!chNFe) {
       throw new Error("chNFe não informada.")
@@ -96,6 +115,9 @@ class DistribuicaoDFe {
     return controllerDistribuicaoDFe.enviar(opts)
   }
 
+  /**
+   * @param {string} nsu
+   */
   consultaPorNSU(nsu) {
     if (nsu === 0) {
       nsu = "000000000000000"

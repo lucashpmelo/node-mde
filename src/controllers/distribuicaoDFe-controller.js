@@ -62,6 +62,9 @@ exports.enviar = async (opts) => {
   return retorno
 }
 
+/**
+ * @returns {{retDistDFeInt:{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string}, docZip:[{xml: string,nsu: string}]} | {error: string}}
+ */
 async function montarRetorno(data) {
   try {
     const json = xml2json(data)

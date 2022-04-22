@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- Types
+
 ### Corrigido
 
 - Otimizado código de comunicação com o Web Service

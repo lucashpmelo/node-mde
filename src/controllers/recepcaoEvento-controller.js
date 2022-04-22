@@ -63,6 +63,9 @@ exports.enviar = async (opts) => {
   return retorno
 }
 
+/**
+ * @returns {{retEnvEvento:{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string}, infEvento:{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}} | {error: string}}
+ */
 function montarRetorno(data) {
   try {
     const json = xml2json(data)

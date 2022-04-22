@@ -15,6 +15,19 @@ const EVENTO = {
   210240: { tpEvento: 210240, descEvento: "Operacao nao Realizada" },
 }
 class RecepcaoEvento {
+  /**
+   * @param {Object} opts
+   * @param {Buffer} opts.pfx
+   * @param {string} opts.passphrase
+   * @param {string} opts.cert
+   * @param {string} opts.key
+   * @param {string} opts.chNFe
+   * @param {string} opts.cnpj
+   * @param {string} opts.tpAmb
+   * @param {Object} opts.options
+   * @param {Object} opts.options.requestOptions
+   * @param {Object} opts.options.httpsOptions
+   */
   constructor(opts) {
     const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
 
@@ -67,7 +80,14 @@ class RecepcaoEvento {
     }
   }
 
-  enviarEvento({ tipoEvento = 0, justificativa = "" } = {}) {
+  /**
+   * @param {Object} evento
+   * @param {number} evento.tipoEvento
+   * @param {string} evento.justificativa
+   */
+  enviarEvento(evento) {
+    const { tipoEvento, justificativa } = evento || {}
+
     if (!tipoEvento) {
       throw new Error("Tipo Evento não informado.")
     }
