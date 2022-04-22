@@ -2,6 +2,9 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- Descrição e Palavra-chave
 ## [0.2.2] / 2022-04-22
 
 ### Corrigido

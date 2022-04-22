@@ -1,7 +1,7 @@
 {
   "name": "node-mde",
   "version": "0.2.2",
-  "description": "",
+  "description": "Biblioteca para consultar notas destinadas e enviar evento de manifestação de destinatário",
   "main": "./index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -12,7 +12,17 @@
     "type": "git",
     "url": "git+https://github.com/lucashpmelo/node-mde.git"
   },
-  "keywords": [],
+  "keywords": [
+    "nfe",
+    "sefaz",
+    "nota",
+    "fiscal",
+    "evento",
+    "manifestação",
+    "destinatário",
+    "distribuição",
+    "dfe"
+  ],
   "author": "Lucas Melo <lucashpmelo94@gmail.com>",
   "license": "MIT",
   "bugs": {
