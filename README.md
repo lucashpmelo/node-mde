@@ -47,7 +47,7 @@ console.log(retorno.xml)
 ### Manifestação do Destinatário
 
 ```js
-const { DistribuicaoDFe } = require("node-mde")
+const { RecepcaoEvento } = require("node-mde")
 const fs = require("fs")
 
 const pfx = fs.readFileSync("./certificado.pfx")
@@ -56,7 +56,7 @@ const cnpj = "12345678901234"
 const chNFe = "41000000000000000000000000000000000000000040"
 const tpAmb = "2" //Produção="1"/Homologação="2"
 
-const distribuicao = new DistribuicaoDFe({
+const recepcao = new RecepcaoEvento({
   pfx: pfx,
   passphrase: passphrase,
   cnpj: cnpj,
