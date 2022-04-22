@@ -4,7 +4,8 @@
   "description": "",
   "main": "./index.js",
   "scripts": {
-    "release": "git pull && npm publish"
+    "release": "git pull && npm publish",
+    "types": "npx tsc"
   },
   "repository": {
     "type": "git",

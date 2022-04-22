@@ -1,9 +1,8 @@
 {
-  "include": ["src/**/*"],
+  "include": ["./index.js", "src/**/*"],
   "compilerOptions": {
     "allowJs": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "dist"
+    "emitDeclarationOnly": true
   }
 }

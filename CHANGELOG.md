@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Types
+
 ## [0.2.0] / 2022-04-22
 
 ### Adicionado
