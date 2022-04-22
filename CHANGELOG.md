@@ -5,6 +5,8 @@
 ### Adicionado
 
 - Descrição e Palavra-chave
+- README.md Resumido
+
 ## [0.2.2] / 2022-04-22
 
 ### Corrigido
