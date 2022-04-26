@@ -64,16 +64,16 @@ async function popularDiretorio(path, srcPath) {
     "i"
   )
 
-  const arqLib = arquivos.map((a) => {
+  const arqNew = arquivos.map((a) => {
     return a.replace(searchValue, path)
   })
 
-  const dirLib = diretorios.map((d) => {
+  const dirNew = diretorios.map((d) => {
     return d.replace(searchValue, path)
   })
 
   await Promise.all(
-    dirLib.map(async (d) => {
+    dirNew.map(async (d) => {
       if (!existsSync(d)) await fs.mkdir(d)
 
       return
@@ -81,7 +81,7 @@ async function popularDiretorio(path, srcPath) {
   )
 
   await Promise.all(
-    arqLib.map(async (a, i) => {
+    arqNew.map(async (a, i) => {
       if (!existsSync(a)) {
         const data = await fs.readFile(arquivos[i])
         const { code } = UglifyJS.minify(data.toString())
@@ -99,8 +99,9 @@ async function popularDiretorio(path, srcPath) {
 async function run() {
   const path = `.${sep}lib`
   const srcPath = `.${sep}src`
+  const distPath = `.${sep}dist`
 
-  await limparDiretorio(path)
+  await Promise.all([limparDiretorio(path), limparDiretorio(distPath)])
 
   await popularDiretorio(path, srcPath)
 

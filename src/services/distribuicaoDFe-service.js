@@ -6,16 +6,16 @@ const { convertPFX, zeroPad } = require("../util")
 class DistribuicaoDFe {
   /**
    * @param {Object} opts
-   * @param {Buffer} opts.pfx
-   * @param {string} opts.passphrase
-   * @param {string} opts.cert
-   * @param {string} opts.key
+   * @param {Buffer} [opts.pfx]
+   * @param {string} [opts.passphrase]
+   * @param {string} [opts.cert]
+   * @param {string} [opts.key]
    * @param {string} opts.cUFAutor
    * @param {string} opts.cnpj
    * @param {string} opts.tpAmb
-   * @param {Object} opts.options
-   * @param {Object} opts.options.requestOptions
-   * @param {Object} opts.options.httpsOptions
+   * @param {Object} [opts.options]
+   * @param {Object} [opts.options.requestOptions]
+   * @param {Object} [opts.options.httpsOptions]
    */
   constructor(opts) {
     const { requestOptions = {}, httpsOptions = {} } = opts.options || {}

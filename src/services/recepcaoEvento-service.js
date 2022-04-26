@@ -17,16 +17,20 @@ const EVENTO = {
 class RecepcaoEvento {
   /**
    * @param {Object} opts
-   * @param {Buffer} opts.pfx
-   * @param {string} opts.passphrase
-   * @param {string} opts.cert
-   * @param {string} opts.key
+   * @param {Buffer} [opts.pfx]
+   * @param {string} [opts.passphrase]
+   * @param {string} [opts.cert]
+   * @param {string} [opts.key]
    * @param {string} opts.chNFe
    * @param {string} opts.cnpj
    * @param {string} opts.tpAmb
-   * @param {Object} opts.options
-   * @param {Object} opts.options.requestOptions
-   * @param {Object} opts.options.httpsOptions
+   * @param {string} [opts.idLote = '1']
+   * @param {string} [opts.nSeqEvento = '1']
+   * @param {string} [opts.cOrgao = '91']
+   * @param {string} [opts.timezone = 'America/Sao_Paulo']
+   * @param {Object} [opts.options]
+   * @param {Object} [opts.options.requestOptions]
+   * @param {Object} [opts.options.httpsOptions]
    */
   constructor(opts) {
     const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
@@ -69,9 +73,9 @@ class RecepcaoEvento {
       chNFe: opts.chNFe,
       cnpj: opts.cnpj,
       tpAmb: opts.tpAmb,
-      idLote: opts.idLote || 1,
-      nSeqEvento: opts.nSeqEvento || 1,
-      cOrgao: opts.cOrgao || 91,
+      idLote: opts.idLote || "1",
+      nSeqEvento: opts.nSeqEvento || "1",
+      cOrgao: opts.cOrgao || "91",
       timezone: opts.timezone || "America/Sao_Paulo",
       cert: cert,
       key: key,

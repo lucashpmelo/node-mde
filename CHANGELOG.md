@@ -2,6 +2,11 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Script para build do código
+- Types
+
 ## [0.4.1] / 2022-04-25
 
 ### Corrigido
