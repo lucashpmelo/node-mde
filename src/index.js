@@ -3,11 +3,15 @@
 const DistribuicaoDFe = require("./services/distribuicaoDFe-service")
 const RecepcaoEvento = require("./services/recepcaoEvento-service")
 
-const mde = {
+module.exports = {
   DistribuicaoDFe: DistribuicaoDFe,
   RecepcaoEvento: RecepcaoEvento,
 }
-
-module.exports = mde
-module.exports.default = mde
-module.exports.mde = mde
+module.exports.default = {
+  DistribuicaoDFe: DistribuicaoDFe,
+  RecepcaoEvento: RecepcaoEvento,
+}
+module.exports.mde = {
+  DistribuicaoDFe: DistribuicaoDFe,
+  RecepcaoEvento: RecepcaoEvento,
+}
