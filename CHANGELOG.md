@@ -5,7 +5,12 @@
 ### Adicionado
 
 - Script para minificação do código
+- Script para build do código (Gera os types e o código minificado)
 - .npmignore
+
+### Corrigido
+
+- Palavra-chave
 
 ### Removido
 

@@ -20,11 +20,13 @@
     "nota",
     "fiscal",
     "evento",
-    "manifestação",
-    "destinatário",
-    "distribuição",
+    "manifestacao",
+    "destinatario",
+    "distribuicao",
     "dfe",
-    "mde"
+    "mde",
+    "manifestacaonfe",
+    "distribuicaodfe"
   ],
   "author": "Lucas Melo <lucashpmelo94@gmail.com>",
   "license": "MIT",
