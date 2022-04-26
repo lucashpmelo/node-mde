@@ -2,6 +2,17 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- Script para minificação do código
+- .npmignore
+
+### Removido
+
+- Types do repositório Git
+- src do repositório NPM
+- tsconfig.json do repositório NPM
+
 ## [0.3.0] / 2022-04-22
 
 ### Adicionado

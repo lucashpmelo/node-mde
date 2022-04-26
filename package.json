@@ -2,12 +2,12 @@
   "name": "node-mde",
   "version": "0.3.0",
   "description": "Biblioteca para consultar notas destinadas e enviar evento de manifestação do destinatário",
-  "main": "./index.js",
+  "main": "./lib/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "build": "npm run types && npm run minify",
+    "minify": "node ./minify.js",
     "release": "git pull && npm publish",
-    "uglify": "uglifyjs --compress --mangle -- ./src/**/*.js >> ./teste.js",
-    "teste": "for f in *.js; do short=${f%.js}; uglifyjs $f > $short.min.js; done",
     "types": "npx tsc"
   },
   "repository": {
