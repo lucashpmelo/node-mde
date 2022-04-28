@@ -3,19 +3,11 @@
 const axios = require("axios").default
 const https = require("https")
 
-const URL = {
-  distribuicao: {
-    1: "https://www1.nfe.fazenda.gov.br/NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl",
-    2: "https://hom1.nfe.fazenda.gov.br/NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl",
-  },
-  recepcao: {
-    1: "https://www.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl",
-    2: "https://hom.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl",
-  },
-}
+const ENV = require("../env")
+
 class Instance {
   constructor(opts) {
-    const baseURL = URL[opts.service][opts.tpAmb]
+    const baseURL = ENV[opts.service][opts.tpAmb]
 
     const AgentOptions = Object.assign(
       {
@@ -31,7 +23,7 @@ class Instance {
       {
         baseURL: baseURL,
         headers: {
-          "User-Agent": `node-mde`,
+          "User-Agent": `node-mde/${ENV.version}`,
           "Content-Type": "text/xml;charset=utf-8",
         },
         httpsAgent: httpsAgent,
