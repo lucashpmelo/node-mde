@@ -5,6 +5,7 @@
 ### Corrigido
 
 - Script para build do código
+- Retorno da Sefaz
 - Types
 
 ## [0.4.1] / 2022-04-25
