@@ -79,8 +79,8 @@ class RecepcaoEvento {
       timezone: opts.timezone || "America/Sao_Paulo",
       cert: cert,
       key: key,
-      requestOpt: requestOptions,
-      httpsOpt: httpsOptions,
+      requestOptions: requestOptions,
+      httpsOptions: httpsOptions,
     }
   }
 

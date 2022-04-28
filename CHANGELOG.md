@@ -8,6 +8,10 @@
 - Retorno da Sefaz
 - Types
 
+### Modificado
+
+- Consulta por último NSU
+
 ## [0.4.1] / 2022-04-25
 
 ### Corrigido

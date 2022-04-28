@@ -5,8 +5,6 @@ const Client = require("../services/client-service")
 const { enveloparXml, json2xml, unzip, xml2json } = require("../util")
 
 exports.enviar = async (opts) => {
-  const { requestOpt, httpsOpt } = opts
-
   const schema = schemaDistribuicaoDFe.schema(opts)
   const xml = json2xml(schema)
   const data = enveloparXml(xml)
@@ -19,13 +17,18 @@ exports.enviar = async (opts) => {
   const client = new Client({
     service: "distribuicao",
     tpAmb: opts.tpAmb,
-    requestOptions: requestOpt,
-    httpsOptions: httpsOpt,
+    cert: opts.cert,
+    key: opts.key,
+    requestOptions: opts.requestOptions,
+    httpsOptions: opts.httpsOptions,
   })
 
   const consultaRetorno = await client.request(options)
 
   const json = await montarRetorno(consultaRetorno.data)
+
+  if (Math.floor(consultaRetorno.status / 100) > 2 && !json.error)
+    json["error"] = consultaRetorno.data
 
   const retorno = {
     ...consultaRetorno,
@@ -37,7 +40,7 @@ exports.enviar = async (opts) => {
 }
 
 /**
- * @returns {Promise<{retDistDFeInt:{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string}, docZip:[{xml: string,nsu: string}], error: string}>}
+ * @returns {Promise<{retDistDFeInt:{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string}, docZip:[{xml: string,nsu: string,schema: string}], error: string}>}
  */
 async function montarRetorno(data) {
   const retorno = {
@@ -78,6 +81,7 @@ async function montarRetorno(data) {
       return {
         xml: notaXml,
         nsu: doc?._attributes?.NSU,
+        schema: doc?._attributes?.schema,
       }
     })
   )

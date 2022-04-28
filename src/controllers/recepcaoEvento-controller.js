@@ -5,8 +5,6 @@ const Client = require("../services/client-service")
 const { assinaturaXml, enveloparXml, json2xml, xml2json } = require("../util")
 
 exports.enviar = async (opts) => {
-  const { requestOpt, httpsOpt } = opts
-
   const schema = schemaRecepcaoEvento.schema(opts)
   const xml = json2xml(schema)
   const xmlSign = assinaturaXml(opts.cert, opts.key, xml)
@@ -20,13 +18,18 @@ exports.enviar = async (opts) => {
   const client = new Client({
     service: "recepcao",
     tpAmb: opts.tpAmb,
-    requestOptions: requestOpt,
-    httpsOptions: httpsOpt,
+    cert: opts.cert,
+    key: opts.key,
+    requestOptions: opts.requestOptions,
+    httpsOptions: opts.httpsOptions,
   })
 
   const eventoRetorno = await client.request(options)
 
   const json = montarRetorno(eventoRetorno.data)
+
+  if (Math.floor(eventoRetorno.status / 100) > 2 && !json.error)
+    json["error"] = eventoRetorno.data
 
   const retorno = {
     ...eventoRetorno,

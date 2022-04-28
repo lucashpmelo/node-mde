@@ -60,8 +60,8 @@ class DistribuicaoDFe {
       tpAmb: opts.tpAmb,
       cert: cert,
       key: key,
-      requestOpt: requestOptions,
-      httpsOpt: httpsOptions,
+      requestOptions: requestOptions,
+      httpsOptions: httpsOptions,
     }
   }
 
@@ -69,24 +69,23 @@ class DistribuicaoDFe {
    * @param {string} ultNSU
    */
   consultaPorUltNSU(ultNSU) {
-    const pesquisa = {
+    if (!ultNSU) {
+      throw new Error("Último NSU não informado.")
+    }
+
+    ultNSU = String(ultNSU)
+
+    if (ultNSU.length > 15) {
+      throw new Error("NSU com tamanho incorreto.")
+    }
+
+    this.opts["pesquisa"] = {
       grupo: "distNSU",
       consulta: "ultNSU",
-      valor: "000000000000000",
+      valor: zeroPad(ultNSU, 15),
     }
 
-    if (ultNSU) {
-      ultNSU = String(ultNSU)
-      if (ultNSU.length > 15) {
-        throw new Error("NSU com tamanho incorreto.")
-      }
-      pesquisa["valor"] = zeroPad(ultNSU, 15)
-    }
-
-    const opts = this.opts
-    opts["pesquisa"] = pesquisa
-
-    return controllerDistribuicaoDFe.enviar(opts)
+    return controllerDistribuicaoDFe.enviar(this.opts)
   }
 
   /**
@@ -103,16 +102,13 @@ class DistribuicaoDFe {
       throw new Error("chNFe com tamanho incorreto.")
     }
 
-    const pesquisa = {
+    this.opts["pesquisa"] = {
       grupo: "consChNFe",
       consulta: "chNFe",
       valor: chNFe,
     }
 
-    const opts = this.opts
-    opts["pesquisa"] = pesquisa
-
-    return controllerDistribuicaoDFe.enviar(opts)
+    return controllerDistribuicaoDFe.enviar(this.opts)
   }
 
   /**
@@ -132,16 +128,13 @@ class DistribuicaoDFe {
       throw new Error("NSU com tamanho incorreto.")
     }
 
-    const pesquisa = {
+    this.opts["pesquisa"] = {
       grupo: "consNSU",
       consulta: "NSU",
       valor: zeroPad(nsu, 15),
     }
 
-    const opts = this.opts
-    opts["pesquisa"] = pesquisa
-
-    return controllerDistribuicaoDFe.enviar(opts)
+    return controllerDistribuicaoDFe.enviar(this.opts)
   }
 }
 
