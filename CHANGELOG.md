@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.6.0] / 2022-04-28
+
 ### Modificado
 
 - Biblioteca para geração de XML
@@ -85,7 +87,8 @@
 - - 210220 - Desconhecimento da Operação
 - - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.5.0...HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.6.0...HEAD
+[0.6.0]: https://github.com/lucashpmelo/node-mde/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/lucashpmelo/node-mde/compare/0.4.1...0.5.0
 [0.4.1]: https://github.com/lucashpmelo/node-mde/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/lucashpmelo/node-mde/compare/0.3.0...0.4.0
