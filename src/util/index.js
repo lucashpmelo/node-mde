@@ -1,7 +1,7 @@
 "use strict"
 
+const { XMLBuilder, XMLParser } = require("fast-xml-parser")
 const forge = require("node-forge")
-const xmlJs = require("xml-js")
 const xmlCrypto = require("xml-crypto")
 const zlib = require("zlib")
 
@@ -32,16 +32,21 @@ exports.unzip = async (data) => {
 }
 
 exports.json2xml = (json) => {
-  return xmlJs.json2xml(json)
+  return new XMLBuilder({
+    ignoreAttributes: false,
+  }).build(json)
 }
 
 exports.xml2json = (xml) => {
-  return JSON.parse(
-    xmlJs.xml2json(xml, {
-      compact: true,
-      textKey: "value",
-    })
-  )
+  return new XMLParser({
+    attributeNamePrefix: "@_",
+    textNodeName: "value",
+    ignoreAttributes: false,
+    allowBooleanAttributes: false,
+    parseAttributeValue: false,
+    parseTagValue: false,
+    trimValues: true,
+  }).parse(xml)
 }
 
 function _MyKeyInfo(cert) {

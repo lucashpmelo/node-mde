@@ -53,7 +53,7 @@ function montarRetorno(data) {
   const json = xml2json(data)
 
   if (json.error) {
-    retorno["error"] = json?.error?.value || "Falha ao montar retorno do SEFAZ."
+    retorno["error"] = json.error || "Falha ao montar retorno do SEFAZ."
   }
 
   const {
@@ -70,25 +70,25 @@ function montarRetorno(data) {
   } = json
 
   retorno["retEnvEvento"] = {
-    idLote: retEnvEvento?.idLote?.value || "",
-    tpAmb: retEnvEvento?.tpAmb?.value || "",
-    verAplic: retEnvEvento?.verAplic?.value || "",
-    cOrgao: retEnvEvento?.cOrgao?.value || "",
-    cStat: retEnvEvento?.cStat?.value || "",
-    xMotivo: retEnvEvento?.xMotivo?.value || "",
+    idLote: retEnvEvento.idLote || "",
+    tpAmb: retEnvEvento.tpAmb || "",
+    verAplic: retEnvEvento.verAplic || "",
+    cOrgao: retEnvEvento.cOrgao || "",
+    cStat: retEnvEvento.cStat || "",
+    xMotivo: retEnvEvento.xMotivo || "",
   }
 
   retorno["infEvento"] = {
-    tpAmb: infEvento?.tpAmb?.value || "",
-    verAplic: infEvento?.verAplic?.value || "",
-    cOrgao: infEvento?.cOrgao?.value || "",
-    cStat: infEvento?.cStat?.value || "",
-    xMotivo: infEvento?.xMotivo?.value || "",
-    chNFe: infEvento?.chNFe?.value || "",
-    tpEvento: infEvento?.tpEvento?.value || "",
-    xEvento: infEvento?.xEvento?.value || "",
-    nSeqEvento: infEvento?.nSeqEvento?.value || "",
-    dhRegEvento: infEvento?.dhRegEvento?.value || "",
+    tpAmb: infEvento.tpAmb || "",
+    verAplic: infEvento.verAplic || "",
+    cOrgao: infEvento.cOrgao || "",
+    cStat: infEvento.cStat || "",
+    xMotivo: infEvento.xMotivo || "",
+    chNFe: infEvento.chNFe || "",
+    tpEvento: infEvento.tpEvento || "",
+    xEvento: infEvento.xEvento || "",
+    nSeqEvento: infEvento.nSeqEvento || "",
+    dhRegEvento: infEvento.dhRegEvento || "",
   }
 
   return retorno

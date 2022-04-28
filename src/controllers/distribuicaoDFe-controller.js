@@ -40,7 +40,7 @@ exports.enviar = async (opts) => {
 }
 
 /**
- * @returns {Promise<{retDistDFeInt:{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string}, docZip:[{xml: string,nsu: string,schema: string}], error: string}>}
+ * @returns {Promise<{retDistDFeInt:{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string}, docZip:[{xml: string,json: Object,nsu: string,schema: string}], error: string}>}
  */
 async function montarRetorno(data) {
   const retorno = {
@@ -52,7 +52,7 @@ async function montarRetorno(data) {
   const json = xml2json(data)
 
   if (json.error) {
-    retorno["error"] = json?.error?.value || "Falha ao montar retorno do SEFAZ."
+    retorno["error"] = json.error || "Falha ao montar retorno do SEFAZ."
   }
 
   const {
@@ -78,22 +78,24 @@ async function montarRetorno(data) {
   const docZip = await Promise.all(
     loteDistDFeInt["docZip"].map(async (doc) => {
       const notaXml = await unzip(doc.value)
+      const notaJson = xml2json(notaXml)
       return {
         xml: notaXml,
-        nsu: doc?._attributes?.NSU,
-        schema: doc?._attributes?.schema,
+        json: notaJson,
+        nsu: doc["@_NSU"],
+        schema: doc["@_schema"],
       }
     })
   )
 
   retorno["retDistDFeInt"] = {
-    tpAmb: retDistDFeInt?.tpAmb?.value || "",
-    verAplic: retDistDFeInt?.verAplic?.value || "",
-    cStat: retDistDFeInt?.cStat?.value || "",
-    xMotivo: retDistDFeInt?.xMotivo?.value || "",
-    dhResp: retDistDFeInt?.dhResp?.value || "",
-    ultNSU: retDistDFeInt?.ultNSU?.value || "",
-    maxNSU: retDistDFeInt?.maxNSU?.value || "",
+    tpAmb: retDistDFeInt.tpAmb || "",
+    verAplic: retDistDFeInt.verAplic || "",
+    cStat: retDistDFeInt.cStat || "",
+    xMotivo: retDistDFeInt.xMotivo || "",
+    dhResp: retDistDFeInt.dhResp || "",
+    ultNSU: retDistDFeInt.ultNSU || "",
+    maxNSU: retDistDFeInt.maxNSU || "",
   }
 
   retorno["docZip"] = docZip

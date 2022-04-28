@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Modificado
+
+- Biblioteca para geração de XML
+
 ## [0.5.0] / 2022-04-28
 
 ### Corrigido
