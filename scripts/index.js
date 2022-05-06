@@ -2,6 +2,7 @@ const fs = require("fs").promises
 const { existsSync } = require("fs")
 const { sep } = require("path")
 const UglifyJS = require("uglify-js")
+const { version } = require("../package.json")
 
 async function listarArquivosDiretorio(
   diretorio,
@@ -96,10 +97,22 @@ async function popularDiretorio(path, srcPath) {
   return
 }
 
+async function atualizaVersion() {
+  const dir = `.${sep}src${sep}env`
+  const path = dir + sep + "index.js"
+
+  const data = await fs.readFile(path)
+  const env = data.toString().replace(/(\d).(\d).(\d)/g, version)
+
+  await fs.writeFile(path, env)
+}
+
 async function run() {
   const path = `.${sep}lib`
   const srcPath = `.${sep}src`
   const distPath = `.${sep}dist`
+
+  await atualizaVersion()
 
   await Promise.all([limparDiretorio(path), limparDiretorio(distPath)])
 

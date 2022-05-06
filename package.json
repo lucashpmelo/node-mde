@@ -5,8 +5,8 @@
   "main": "./lib/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run minify && npm run types",
-    "minify": "node ./minify.js",
+    "build": "npm run script && npm run types",
+    "script": "node ./scripts/index.js",
     "release": "git pull && npm publish",
     "types": "npx tsc"
   },
