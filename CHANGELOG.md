@@ -5,6 +5,11 @@
 ### Adicionado
 
 - Cadeia de Certificados da NF-e (www1.nfe.fazenda.gov.br)
+- Suporte SOAP 1.2
+
+### Removido
+
+- Suporte SOAP 1.1
 
 ## [0.6.0] / 2022-04-28
 

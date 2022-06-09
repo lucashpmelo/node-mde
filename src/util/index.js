@@ -11,13 +11,7 @@ exports.zeroPad = (num, places) => {
 }
 
 exports.enveloparXml = (xml) => {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-    <soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-        <soap12:Header/>
-        <soap12:Body>
-            ${xml}
-        </soap12:Body>
-    </soap12:Envelope>`
+  return `<?xml version="1.0" encoding="utf-8"?><soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"><soap12:Body>${xml}</soap12:Body></soap12:Envelope>`
 }
 
 exports.unzip = async (data) => {

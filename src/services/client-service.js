@@ -26,7 +26,7 @@ class Instance {
         baseURL: baseURL,
         headers: {
           "User-Agent": `node-mde/${ENV.version}`,
-          "Content-Type": "text/xml;charset=utf-8",
+          "Content-Type": "application/soap+xml; charset=utf-8",
         },
         httpsAgent: httpsAgent,
         timeout: 60000,
