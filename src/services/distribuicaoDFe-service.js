@@ -68,7 +68,7 @@ class DistribuicaoDFe {
   /**
    * @param {string} ultNSU
    */
-  consultaPorUltNSU(ultNSU) {
+  consultaUltNSU(ultNSU) {
     if (!ultNSU) {
       throw new Error("Último NSU não informado.")
     }
@@ -91,7 +91,7 @@ class DistribuicaoDFe {
   /**
    * @param {string} chNFe
    */
-  consultaPorChaveNFe(chNFe) {
+  consultaChNFe(chNFe) {
     if (!chNFe) {
       throw new Error("chNFe não informada.")
     }
@@ -114,7 +114,7 @@ class DistribuicaoDFe {
   /**
    * @param {string} nsu
    */
-  consultaPorNSU(nsu) {
+  consultaNSU(nsu) {
     if (nsu === 0) {
       nsu = "000000000000000"
     }

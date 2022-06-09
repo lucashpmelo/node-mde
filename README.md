@@ -34,7 +34,7 @@ const distribuicao = new DistribuicaoDFe({
   tpAmb: tpAmb,
 })
 
-const retorno = await distribuicao.consultaPorUltNSU("000000000000000")
+const retorno = await distribuicao.consultaUltNSU("000000000000000")
 
 if (retorno.data.error) {
   throw new Error(retorno.data.error)

@@ -2,6 +2,13 @@
 
 ## [Não publicado]
 
+### Modificado
+
+- Simplificado o nome das funções de consulta do serviço de DistribuicaoDFe
+- - consultaPorUltNSU => consultaUltNSU
+- - consultaPorChaveNFe => consultaChNFe
+- - consultaPorNSU => consultaNSU
+
 ## [0.7.0] / 2022-06-09
 
 ### Adicionado

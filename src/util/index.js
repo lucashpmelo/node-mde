@@ -6,7 +6,7 @@ const xmlCrypto = require("xml-crypto")
 const zlib = require("zlib")
 
 exports.zeroPad = (num, places) => {
-  let zero = places - num.toString().length + 1
+  const zero = places - num.toString().length + 1
   return Array(+(zero > 0 && zero)).join("0") + num
 }
 
