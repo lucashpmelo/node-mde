@@ -7,6 +7,10 @@
 - Cadeia de Certificados da NF-e (www1.nfe.fazenda.gov.br)
 - Suporte SOAP 1.2
 
+### Modificado
+
+- URL do Web Service de Recepção Evento do Ambiente de homologação conforme publicado no informe dia 20/05/2022
+
 ### Removido
 
 - Suporte SOAP 1.1
