@@ -8,11 +8,13 @@ const ENV = require("../env")
 class Instance {
   constructor(opts) {
     const baseURL = ENV[opts.service][opts.tpAmb]
+    const ca = ENV["ca"]
 
     const AgentOptions = Object.assign(
       {
         cert: opts.cert,
         key: opts.key,
+        ca: ca,
       },
       { ...opts.httpsOptions }
     )
