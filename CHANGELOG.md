@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.7.1] / 2022-06-09
+
 ### Modificado
 
 - Simplificado o nome das funções de consulta do serviço de DistribuicaoDFe
@@ -117,7 +119,8 @@
 - - 210220 - Desconhecimento da Operação
 - - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.7.0...HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.7.1...HEAD
+[0.7.1]: https://github.com/lucashpmelo/node-mde/compare/0.7.0...0.7.1
 [0.7.0]: https://github.com/lucashpmelo/node-mde/compare/0.6.0...0.7.0
 [0.6.0]: https://github.com/lucashpmelo/node-mde/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/lucashpmelo/node-mde/compare/0.4.1...0.5.0
