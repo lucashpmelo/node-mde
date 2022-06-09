@@ -9,6 +9,10 @@
 - - consultaPorChaveNFe => consultaChNFe
 - - consultaPorNSU => consultaNSU
 
+### Segurança
+
+- Atualizado as dependências npm
+
 ## [0.7.0] / 2022-06-09
 
 ### Adicionado
