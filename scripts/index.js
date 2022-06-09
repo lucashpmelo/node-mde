@@ -102,7 +102,9 @@ async function atualizaVersion() {
   const path = dir + sep + "index.js"
 
   const data = await fs.readFile(path)
-  const env = data.toString().replace(/(\d).(\d).(\d)/g, version)
+  const env = data
+    .toString()
+    .replace(/version: "(\d).(\d).(\d)"/g, `version: "${version}"`)
 
   await fs.writeFile(path, env)
 }
