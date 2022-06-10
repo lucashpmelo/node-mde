@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Montagem do Esquema XML de RecepcaoEvento
+
 ## [0.7.2] / 2022-06-10
 
 ### Corrigido

@@ -118,6 +118,7 @@ class RecepcaoEvento {
 
     opts["tpEvento"] = tpEvento
     opts["descEvento"] = descEvento
+    opts["chNFe"] = chNFe
     opts["infEventoId"] = `ID${tpEvento}${chNFe}01`
     opts["dhEvento"] = moment()
       .tz(opts.timezone)

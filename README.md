@@ -64,7 +64,7 @@ const recepcao = new RecepcaoEvento({
 
 const retorno = await recepcao.enviarEvento({
   chNFe: "41000000000000000000000000000000000000000040",
-  tipoEvento: 210210,
+  tipoEvento: 210210, // 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada
 })
 
 if (retorno.data.error) {
