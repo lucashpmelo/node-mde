@@ -53,18 +53,19 @@ const fs = require("fs")
 const pfx = fs.readFileSync("./certificado.pfx")
 const passphrase = "senha"
 const cnpj = "12345678901234"
-const chNFe = "41000000000000000000000000000000000000000040"
 const tpAmb = "2" //Produção="1"/Homologação="2"
 
 const recepcao = new RecepcaoEvento({
   pfx: pfx,
   passphrase: passphrase,
   cnpj: cnpj,
-  chNFe: chNFe,
   tpAmb: tpAmb,
 })
 
-const retorno = await recepcao.enviarEvento({ tipoEvento: 210210 })
+const retorno = await recepcao.enviarEvento({
+  chNFe: "41000000000000000000000000000000000000000040",
+  tipoEvento: 210210,
+})
 
 if (retorno.data.error) {
   throw new Error(retorno.data.error)
