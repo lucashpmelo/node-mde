@@ -85,7 +85,11 @@ async function popularDiretorio(path, srcPath) {
     arqNew.map(async (a, i) => {
       if (!existsSync(a)) {
         const data = await fs.readFile(arquivos[i])
-        const { code } = UglifyJS.minify(data.toString())
+        const { code } = UglifyJS.minify(data.toString(), {
+          output: {
+            beautify: true,
+          },
+        })
 
         await fs.writeFile(a, code)
       }
