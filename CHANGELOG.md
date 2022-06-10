@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Modificado
+
+- A chave NFe não é mais passada no construtor do serviço de RecepcaoEvento, agora ela deve ser enviada na função de enviarEvento junto com o tipoEvento e justificativa
+
 ## [0.7.1] / 2022-06-09
 
 ### Modificado

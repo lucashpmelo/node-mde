@@ -21,7 +21,6 @@ class RecepcaoEvento {
    * @param {string} [opts.passphrase]
    * @param {string} [opts.cert]
    * @param {string} [opts.key]
-   * @param {string} opts.chNFe
    * @param {string} opts.cnpj
    * @param {string} opts.tpAmb
    * @param {string} [opts.idLote = '1']
@@ -57,10 +56,6 @@ class RecepcaoEvento {
       throw new Error("Key não informada.")
     }
 
-    if (!opts.chNFe) {
-      throw new Error("Chave da NFe não informada.")
-    }
-
     if (!opts.cnpj) {
       throw new Error("CNPJ não informado.")
     }
@@ -70,7 +65,6 @@ class RecepcaoEvento {
     }
 
     this.opts = {
-      chNFe: opts.chNFe,
       cnpj: opts.cnpj,
       tpAmb: opts.tpAmb,
       idLote: opts.idLote || "1",
@@ -86,11 +80,17 @@ class RecepcaoEvento {
 
   /**
    * @param {Object} evento
+   * @param {string} evento.chNFe
    * @param {number} evento.tipoEvento
    * @param {string} evento.justificativa
    */
   enviarEvento(evento) {
-    const { tipoEvento, justificativa } = evento || {}
+    const opts = this.opts
+    const { chNFe, tipoEvento, justificativa } = evento || {}
+
+    if (!chNFe) {
+      throw new Error("Chave da NFe não informada.")
+    }
 
     if (!tipoEvento) {
       throw new Error("Tipo Evento não informado.")
@@ -101,17 +101,6 @@ class RecepcaoEvento {
         "Tipo Evento deve conter um dos valores: 210200, 210210, 210220 ou 210240"
       )
     }
-
-    const opts = this.opts
-    const { chNFe, timezone } = opts
-    const { tpEvento, descEvento } = EVENTO[tipoEvento]
-    const infEventoId = `ID${tpEvento}${chNFe}01`
-    const dhEvento = moment().tz(timezone).format("YYYY-MM-DD[T]HH:mm:ssZ")
-
-    opts["tpEvento"] = tpEvento
-    opts["descEvento"] = descEvento
-    opts["infEventoId"] = infEventoId
-    opts["dhEvento"] = dhEvento
 
     if (Number(tipoEvento) === 210240) {
       if (!justificativa) {
@@ -124,6 +113,15 @@ class RecepcaoEvento {
 
       opts["xJust"] = justificativa
     }
+
+    const { tpEvento, descEvento } = EVENTO[tipoEvento]
+
+    opts["tpEvento"] = tpEvento
+    opts["descEvento"] = descEvento
+    opts["infEventoId"] = `ID${tpEvento}${chNFe}01`
+    opts["dhEvento"] = moment()
+      .tz(opts.timezone)
+      .format("YYYY-MM-DD[T]HH:mm:ssZ")
 
     return controllerRecepcaoEvento.enviar(opts)
   }
