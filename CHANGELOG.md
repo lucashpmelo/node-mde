@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- VS Code settings e prettier.config.js
+
 ## [0.7.3] / 2022-06-10
 
 ### Corrigido

@@ -1,4 +1,6 @@
+.vscode
 src
 scripts
 package-lock.json
 tsconfig.json
+prettier.config.js
