@@ -17,14 +17,14 @@ $ npm i node-mde
 ### Distribuição de DF-e
 
 ```js
-const { DistribuicaoDFe } = require("node-mde")
-const fs = require("fs")
+const { DistribuicaoDFe } = require('node-mde')
+const fs = require('fs')
 
-const pfx = fs.readFileSync("./certificado.pfx")
-const passphrase = "senha"
-const cnpj = "12345678901234"
-const cUFAutor = "41" //PR
-const tpAmb = "2" //Produção="1"/Homologação="2"
+const pfx = fs.readFileSync('./certificado.pfx')
+const passphrase = 'senha'
+const cnpj = '12345678901234'
+const cUFAutor = '41' //PR
+const tpAmb = '2' //Produção="1"/Homologação="2"
 
 const distribuicao = new DistribuicaoDFe({
   pfx: pfx,
@@ -34,7 +34,7 @@ const distribuicao = new DistribuicaoDFe({
   tpAmb: tpAmb,
 })
 
-const retorno = await distribuicao.consultaUltNSU("000000000000000")
+const retorno = await distribuicao.consultaUltNSU('000000000000000')
 
 if (retorno.data.error) {
   throw new Error(retorno.data.error)
@@ -47,13 +47,13 @@ console.log(retorno.xml)
 ### Manifestação do Destinatário
 
 ```js
-const { RecepcaoEvento } = require("node-mde")
-const fs = require("fs")
+const { RecepcaoEvento } = require('node-mde')
+const fs = require('fs')
 
-const pfx = fs.readFileSync("./certificado.pfx")
-const passphrase = "senha"
-const cnpj = "12345678901234"
-const tpAmb = "2" //Produção="1"/Homologação="2"
+const pfx = fs.readFileSync('./certificado.pfx')
+const passphrase = 'senha'
+const cnpj = '12345678901234'
+const tpAmb = '2' //Produção="1"/Homologação="2"
 
 const recepcao = new RecepcaoEvento({
   pfx: pfx,
@@ -62,9 +62,21 @@ const recepcao = new RecepcaoEvento({
   tpAmb: tpAmb,
 })
 
+const lote = [
+  {
+    chNFe: '41000000000000000000000000000000000000000040',
+    tipoEvento: 210210, // 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada
+  },
+  {
+    chNFe: '41000000000000000000000000000000000000000041',
+    tipoEvento: 210240,
+    justificativa: 'Não foi realizado a entrega correta dos itens da nota.',
+  },
+]
+
 const retorno = await recepcao.enviarEvento({
-  chNFe: "41000000000000000000000000000000000000000040",
-  tipoEvento: 210210, // 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada
+  idLote: '1337',
+  lote: lote,
 })
 
 if (retorno.data.error) {
