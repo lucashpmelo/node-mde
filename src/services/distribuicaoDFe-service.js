@@ -1,7 +1,7 @@
-"use strict"
+'use strict'
 
-const controllerDistribuicaoDFe = require("../controllers/distribuicaoDFe-controller")
-const { convertPFX, zeroPad } = require("../util")
+const controllerDistribuicaoDFe = require('../controllers/distribuicaoDFe-controller')
+const { convertPFX, zeroPad } = require('../util')
 
 class DistribuicaoDFe {
   /**
@@ -20,12 +20,12 @@ class DistribuicaoDFe {
   constructor(opts) {
     const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
 
-    let cert = opts.cert || ""
-    let key = opts.key || ""
+    let cert = opts.cert || ''
+    let key = opts.key || ''
 
     if (opts.pfx) {
       if (!opts.passphrase) {
-        throw new Error("Senha do Certificado não informada.")
+        throw new Error('Senha do Certificado não informada.')
       }
 
       const pfxLoad = convertPFX(opts.pfx, opts.passphrase)
@@ -35,23 +35,23 @@ class DistribuicaoDFe {
     }
 
     if (!cert) {
-      throw new Error("Cert não informado.")
+      throw new Error('Cert não informado.')
     }
 
     if (!key) {
-      throw new Error("Key não informada.")
+      throw new Error('Key não informada.')
     }
 
     if (!opts.cUFAutor) {
-      throw new Error("Codigo UF NFe não informado.")
+      throw new Error('Codigo UF NFe não informado.')
     }
 
     if (!opts.cnpj) {
-      throw new Error("CNPJ não informado.")
+      throw new Error('CNPJ não informado.')
     }
 
     if (!opts.tpAmb) {
-      throw new Error("Ambiente não informado.")
+      throw new Error('Ambiente não informado.')
     }
 
     this.opts = {
@@ -70,18 +70,18 @@ class DistribuicaoDFe {
    */
   consultaUltNSU(ultNSU) {
     if (!ultNSU) {
-      throw new Error("Último NSU não informado.")
+      throw new Error('Último NSU não informado.')
     }
 
     ultNSU = String(ultNSU)
 
     if (ultNSU.length > 15) {
-      throw new Error("NSU com tamanho incorreto.")
+      throw new Error('NSU com tamanho incorreto.')
     }
 
-    this.opts["pesquisa"] = {
-      grupo: "distNSU",
-      consulta: "ultNSU",
+    this.opts['pesquisa'] = {
+      grupo: 'distNSU',
+      consulta: 'ultNSU',
       valor: zeroPad(ultNSU, 15),
     }
 
@@ -93,18 +93,18 @@ class DistribuicaoDFe {
    */
   consultaChNFe(chNFe) {
     if (!chNFe) {
-      throw new Error("chNFe não informada.")
+      throw new Error('chNFe não informada.')
     }
 
     chNFe = String(chNFe)
 
     if (chNFe.length !== 44) {
-      throw new Error("chNFe com tamanho incorreto.")
+      throw new Error('chNFe com tamanho incorreto.')
     }
 
-    this.opts["pesquisa"] = {
-      grupo: "consChNFe",
-      consulta: "chNFe",
+    this.opts['pesquisa'] = {
+      grupo: 'consChNFe',
+      consulta: 'chNFe',
       valor: chNFe,
     }
 
@@ -116,21 +116,21 @@ class DistribuicaoDFe {
    */
   consultaNSU(nsu) {
     if (nsu === 0) {
-      nsu = "000000000000000"
+      nsu = '000000000000000'
     }
 
     if (!nsu) {
-      throw new Error("NSU não informado.")
+      throw new Error('NSU não informado.')
     }
 
     nsu = String(nsu)
     if (nsu.length > 15) {
-      throw new Error("NSU com tamanho incorreto.")
+      throw new Error('NSU com tamanho incorreto.')
     }
 
-    this.opts["pesquisa"] = {
-      grupo: "consNSU",
-      consulta: "NSU",
+    this.opts['pesquisa'] = {
+      grupo: 'consNSU',
+      consulta: 'NSU',
       valor: zeroPad(nsu, 15),
     }
 

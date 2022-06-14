@@ -1,8 +1,8 @@
-const fs = require("fs").promises
-const { existsSync } = require("fs")
-const { sep } = require("path")
-const UglifyJS = require("uglify-js")
-const { version } = require("../package.json")
+const fs = require('fs').promises
+const { existsSync } = require('fs')
+const { sep } = require('path')
+const UglifyJS = require('uglify-js')
+const { version } = require('../package.json')
 
 async function listarArquivosDiretorio(
   diretorio,
@@ -61,8 +61,8 @@ async function popularDiretorio(path, srcPath) {
   const { arquivos, diretorios } = await listarArquivosDiretorio(srcPath)
 
   const searchValue = new RegExp(
-    srcPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
-    "i"
+    srcPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+    'i'
   )
 
   const arqNew = arquivos.map((a) => {
@@ -103,12 +103,12 @@ async function popularDiretorio(path, srcPath) {
 
 async function atualizaVersion() {
   const dir = `.${sep}src${sep}env`
-  const path = dir + sep + "index.js"
+  const path = dir + sep + 'index.js'
 
   const data = await fs.readFile(path)
   const env = data
     .toString()
-    .replace(/version: "(\d).(\d).(\d)"/g, `version: "${version}"`)
+    .replace(/version: '(\d).(\d).(\d)'/g, `version: '${version}'`)
 
   await fs.writeFile(path, env)
 }

@@ -1,13 +1,13 @@
-"use strict"
+'use strict'
 
-const { XMLBuilder, XMLParser } = require("fast-xml-parser")
-const forge = require("node-forge")
-const xmlCrypto = require("xml-crypto")
-const zlib = require("zlib")
+const { XMLBuilder, XMLParser } = require('fast-xml-parser')
+const forge = require('node-forge')
+const xmlCrypto = require('xml-crypto')
+const zlib = require('zlib')
 
 exports.zeroPad = (num, places) => {
   const zero = places - num.toString().length + 1
-  return Array(+(zero > 0 && zero)).join("0") + num
+  return Array(+(zero > 0 && zero)).join('0') + num
 }
 
 exports.enveloparXml = (xml) => {
@@ -15,11 +15,11 @@ exports.enveloparXml = (xml) => {
 }
 
 exports.unzip = async (data) => {
-  const buf = new Buffer.from(data, "base64")
+  const buf = new Buffer.from(data, 'base64')
   return await new Promise((resolve, reject) => {
     zlib.unzip(buf, function (err, buffer) {
       if (err) reject(err)
-      const content = buffer.toString("utf8")
+      const content = buffer.toString('utf8')
       resolve(content)
     })
   })
@@ -33,8 +33,8 @@ exports.json2xml = (json) => {
 
 exports.xml2json = (xml) => {
   return new XMLParser({
-    attributeNamePrefix: "@_",
-    textNodeName: "value",
+    attributeNamePrefix: '@_',
+    textNodeName: 'value',
     ignoreAttributes: false,
     allowBooleanAttributes: false,
     parseAttributeValue: false,
@@ -46,8 +46,8 @@ exports.xml2json = (xml) => {
 function _MyKeyInfo(cert) {
   this.getKeyInfo = function () {
     return `<X509Data><X509Certificate>${cert
-      .split("-----")[2]
-      .replace(/[\r\n]/g, "")}</X509Certificate></X509Data>`
+      .split('-----')[2]
+      .replace(/[\r\n]/g, '')}</X509Certificate></X509Data>`
   }
 }
 
@@ -55,23 +55,23 @@ exports.assinaturaXml = (cert, key, xml) => {
   const sig = new xmlCrypto.SignedXml()
   sig.keyInfoProvider = new _MyKeyInfo(cert)
   sig.addReference("//*[local-name(.)='infEvento']", [
-    "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
-    "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+    'http://www.w3.org/2000/09/xmldsig#enveloped-signature',
+    'http://www.w3.org/TR/2001/REC-xml-c14n-20010315',
   ])
   sig.canonicalizationAlgorithm =
-    "http://www.w3.org/TR/2001/REC-xml-c14n-20010315"
+    'http://www.w3.org/TR/2001/REC-xml-c14n-20010315'
   sig.signingKey = key
   sig.computeSignature(xml, {
     location: {
       reference: "//*[local-name(.)='infEvento']",
-      action: "after",
+      action: 'after',
     },
   })
   return sig.getSignedXml()
 }
 
 exports.convertPFX = (pfx, passphrase) => {
-  const p12buffer = pfx.toString("base64")
+  const p12buffer = pfx.toString('base64')
 
   const asn = forge.asn1.fromDer(forge.util.decode64(p12buffer))
   const p12 = forge.pkcs12.pkcs12FromAsn1(asn, true, passphrase)

@@ -1,14 +1,14 @@
-"use strict"
+'use strict'
 
-const axios = require("axios").default
-const https = require("https")
+const axios = require('axios').default
+const https = require('https')
 
-const ENV = require("../env")
+const ENV = require('../env')
 
 class Instance {
   constructor(opts) {
     const baseURL = ENV[opts.service][opts.tpAmb]
-    const ca = ENV["ca"]
+    const ca = ENV['ca']
 
     const AgentOptions = Object.assign(
       {
@@ -25,8 +25,8 @@ class Instance {
       {
         baseURL: baseURL,
         headers: {
-          "User-Agent": `node-mde/${ENV.version}`,
-          "Content-Type": "application/soap+xml; charset=utf-8",
+          'User-Agent': `node-mde/${ENV.version}`,
+          'Content-Type': 'application/soap+xml; charset=utf-8',
         },
         httpsAgent: httpsAgent,
         timeout: 60000,
@@ -57,7 +57,7 @@ class Instance {
 
         return { status, data }
       } else if (error.request) {
-        if (error.code === "ECONNABORTED") {
+        if (error.code === 'ECONNABORTED') {
           const retorno = {
             status: 504,
             data: `<error>${error.message || error}</error>`,
