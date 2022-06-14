@@ -6,6 +6,10 @@
 
 - VS Code settings e prettier.config.js
 
+### Modificado
+
+- O serviço de RecepcaoEvento foi modificado para aceitar um lote de eventos, agora deve ser enviado uma lista de eventos para a função enviarEvento, e o retorno será uma lista dos eventos processados
+
 ## [0.7.3] / 2022-06-10
 
 ### Corrigido

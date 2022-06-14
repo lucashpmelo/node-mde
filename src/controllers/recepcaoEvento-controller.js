@@ -1,22 +1,32 @@
-"use strict"
+'use strict'
 
-const schemaRecepcaoEvento = require("../schema/recepcaoEvento")
-const Client = require("../services/client-service")
-const { assinaturaXml, enveloparXml, json2xml, xml2json } = require("../util")
+const schemaRecepcaoEvento = require('../schema/recepcaoEvento')
+const Client = require('../services/client-service')
+const { assinaturaXml, enveloparXml, json2xml, xml2json } = require('../util')
 
 exports.enviar = async (opts) => {
-  const schema = schemaRecepcaoEvento.schema(opts)
-  const xml = json2xml(schema)
-  const xmlSign = assinaturaXml(opts.cert, opts.key, xml)
-  const data = enveloparXml(xmlSign)
+  const eventosXML = opts.eventos.map((evento) => {
+    const schema = schemaRecepcaoEvento.schema(evento)
+    const xml = json2xml(schema)
+    const xmlSign = assinaturaXml(opts.cert, opts.key, xml)
+
+    return xmlSign
+  })
+
+  const xml = schemaRecepcaoEvento.schemaLote({
+    idLote: opts.idLote,
+    eventosXML: eventosXML,
+  })
+
+  const data = enveloparXml(xml)
 
   const options = {
-    method: "POST",
+    method: 'POST',
     data: data,
   }
 
   const client = new Client({
-    service: "recepcao",
+    service: 'recepcao',
     tpAmb: opts.tpAmb,
     cert: opts.cert,
     key: opts.key,
@@ -29,7 +39,7 @@ exports.enviar = async (opts) => {
   const json = montarRetorno(eventoRetorno.data)
 
   if (Math.floor(eventoRetorno.status / 100) > 2 && !json.error)
-    json["error"] = eventoRetorno.data
+    json['error'] = eventoRetorno.data
 
   const retorno = {
     ...eventoRetorno,
@@ -41,55 +51,60 @@ exports.enviar = async (opts) => {
 }
 
 /**
- * @returns {{retEnvEvento:{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string}, infEvento:{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}, error: string}}
+ * @returns {{retEnvEvento:{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string}, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}], error: string}}
  */
 function montarRetorno(data) {
   const retorno = {
     retEnvEvento: {},
     infEvento: {},
-    error: "",
+    error: '',
   }
 
   const json = xml2json(data)
 
   if (json.error) {
-    retorno["error"] = json.error || "Falha ao montar retorno do SEFAZ."
+    retorno['error'] = json.error || 'Falha ao montar retorno do SEFAZ.'
   }
 
   const {
-    "soap:Envelope": {
-      "soap:Body": {
-        nfeRecepcaoEventoNFResult: {
-          retEnvEvento: {
-            retEvento: { infEvento = {} } = {},
-            ...retEnvEvento
-          } = {},
-        } = {},
+    'soap:Envelope': {
+      'soap:Body': {
+        nfeRecepcaoEventoNFResult: { retEnvEvento = {} } = {},
       } = {},
     } = {},
   } = json
 
-  retorno["retEnvEvento"] = {
-    idLote: retEnvEvento.idLote || "",
-    tpAmb: retEnvEvento.tpAmb || "",
-    verAplic: retEnvEvento.verAplic || "",
-    cOrgao: retEnvEvento.cOrgao || "",
-    cStat: retEnvEvento.cStat || "",
-    xMotivo: retEnvEvento.xMotivo || "",
+  if (retEnvEvento.retEvento) {
+    if (!Array.isArray(retEnvEvento.retEvento)) {
+      retEnvEvento['retEvento'] = [retEnvEvento.retEvento]
+    }
+  } else {
+    retEnvEvento['retEvento'] = []
   }
 
-  retorno["infEvento"] = {
-    tpAmb: infEvento.tpAmb || "",
-    verAplic: infEvento.verAplic || "",
-    cOrgao: infEvento.cOrgao || "",
-    cStat: infEvento.cStat || "",
-    xMotivo: infEvento.xMotivo || "",
-    chNFe: infEvento.chNFe || "",
-    tpEvento: infEvento.tpEvento || "",
-    xEvento: infEvento.xEvento || "",
-    nSeqEvento: infEvento.nSeqEvento || "",
-    dhRegEvento: infEvento.dhRegEvento || "",
+  retorno['retEnvEvento'] = {
+    idLote: retEnvEvento.idLote || '',
+    tpAmb: retEnvEvento.tpAmb || '',
+    verAplic: retEnvEvento.verAplic || '',
+    cOrgao: retEnvEvento.cOrgao || '',
+    cStat: retEnvEvento.cStat || '',
+    xMotivo: retEnvEvento.xMotivo || '',
   }
+
+  retorno['infEvento'] = retEnvEvento.retEvento.map(({ infEvento }) => {
+    return {
+      tpAmb: infEvento.tpAmb || '',
+      verAplic: infEvento.verAplic || '',
+      cOrgao: infEvento.cOrgao || '',
+      cStat: infEvento.cStat || '',
+      xMotivo: infEvento.xMotivo || '',
+      chNFe: infEvento.chNFe || '',
+      tpEvento: infEvento.tpEvento || '',
+      xEvento: infEvento.xEvento || '',
+      nSeqEvento: infEvento.nSeqEvento || '',
+      dhRegEvento: infEvento.dhRegEvento || '',
+    }
+  })
 
   return retorno
 }
