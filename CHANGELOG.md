@@ -9,6 +9,7 @@
 ### Corrigido
 
 - Types
+- Palavra-chave
 
 ### Modificado
 
