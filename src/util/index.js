@@ -2,7 +2,7 @@
 
 const { XMLBuilder, XMLParser } = require('fast-xml-parser')
 const forge = require('node-forge')
-const xmlCrypto = require('xml-crypto')
+const SignedXml = require('xml-crypto').SignedXml
 const zlib = require('zlib')
 
 exports.zeroPad = (num, places) => {
@@ -43,30 +43,37 @@ exports.xml2json = (xml) => {
   }).parse(xml)
 }
 
-function _MyKeyInfo(cert) {
-  this.getKeyInfo = function () {
-    return `<X509Data><X509Certificate>${cert
-      .split('-----')[2]
-      .replace(/[\r\n]/g, '')}</X509Certificate></X509Data>`
+class MyKeyInfo {
+  constructor(cert) {
+    this.getKeyInfo = function () {
+      return `<X509Data><X509Certificate>${cert
+        .split('-----')[2]
+        .replace(/[\r\n]/g, '')}</X509Certificate></X509Data>`
+    }
   }
 }
 
 exports.assinaturaXml = (cert, key, xml) => {
-  const sig = new xmlCrypto.SignedXml()
-  sig.keyInfoProvider = new _MyKeyInfo(cert)
-  sig.addReference("//*[local-name(.)='infEvento']", [
+  const xpath = "//*[local-name(.)='infEvento']"
+  const transforms = [
     'http://www.w3.org/2000/09/xmldsig#enveloped-signature',
     'http://www.w3.org/TR/2001/REC-xml-c14n-20010315',
-  ])
-  sig.canonicalizationAlgorithm =
-    'http://www.w3.org/TR/2001/REC-xml-c14n-20010315'
+  ]
+  const sig = new SignedXml()
+
+  sig.keyInfoProvider = new MyKeyInfo(cert)
+
+  sig.addReference(xpath, transforms)
+  sig.canonicalizationAlgorithm = transforms[1]
   sig.signingKey = key
+
   sig.computeSignature(xml, {
     location: {
-      reference: "//*[local-name(.)='infEvento']",
+      reference: xpath,
       action: 'after',
     },
   })
+
   return sig.getSignedXml()
 }
 

@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Assinatura XML
+
 ## [0.8.0] / 2022-06-14
 
 ### Adicionado
