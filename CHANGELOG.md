@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Campos faltantes no retorno do serviço de RecepcaoEvento
+
 ## [0.9.0] / 2022-06-21
 
 ### Corrigido

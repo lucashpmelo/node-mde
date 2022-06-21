@@ -107,7 +107,9 @@ function montarRetorno(data) {
       tpEvento: infEvento.tpEvento || '',
       xEvento: infEvento.xEvento || '',
       nSeqEvento: infEvento.nSeqEvento || '',
+      CNPJDest: infEvento.CNPJDest || '',
       dhRegEvento: infEvento.dhRegEvento || '',
+      nProt: infEvento.nProt || '',
     }
   })
 
