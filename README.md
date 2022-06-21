@@ -177,6 +177,10 @@ const lote = [
   },
 ]
 
+/**
+ * idLote: Identificador de controle do Lote de envio do Evento.
+ * lote: Um lote pode conter até 20 eventos.
+ */
 const manifestacao = await recepcao.enviarEvento({
   idLote: '1337',
   lote: lote,
