@@ -12,7 +12,7 @@ class DistribuicaoDFe {
    * @param {string} [opts.key]
    * @param {string} opts.cUFAutor
    * @param {string} opts.cnpj
-   * @param {string} opts.tpAmb
+   * @param {'1' | '2'} opts.tpAmb
    * @param {Object} [opts.options]
    * @param {Object} [opts.options.requestOptions]
    * @param {Object} [opts.options.httpsOptions]

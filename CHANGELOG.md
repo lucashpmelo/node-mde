@@ -5,6 +5,11 @@
 ### Corrigido
 
 - Assinatura XML
+- Types
+
+### Modificado
+
+- O retorno dos serviços de DistribuicaoDFe e RecepcaoEvento
 
 ## [0.8.0] / 2022-06-14
 

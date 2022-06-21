@@ -4,6 +4,9 @@ const schemaRecepcaoEvento = require('../schema/recepcaoEvento')
 const Client = require('../services/client-service')
 const { assinaturaXml, enveloparXml, json2xml, xml2json } = require('../util')
 
+/**
+ * @returns {Promise<{data:{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}]}, error: string, reqXml: string, resXml: string, status: number}>}
+ */
 exports.enviar = async (opts) => {
   const eventosXML = opts.eventos.map((evento) => {
     const schema = schemaRecepcaoEvento.schema(evento)
@@ -38,32 +41,36 @@ exports.enviar = async (opts) => {
 
   const json = montarRetorno(eventoRetorno.data)
 
-  if (Math.floor(eventoRetorno.status / 100) > 2 && !json.error)
-    json['error'] = eventoRetorno.data
-
   const retorno = {
-    ...eventoRetorno,
     data: json,
-    xml: eventoRetorno.data,
+    reqXml: data,
+    resXml: eventoRetorno.data,
+    status: eventoRetorno.status,
+  }
+
+  if (json.error) {
+    retorno['data'] = {}
+    retorno['error'] = json.error
+  }
+
+  if (Math.floor(eventoRetorno.status / 100) > 2 && !json.error) {
+    retorno['data'] = {}
+    retorno['error'] = eventoRetorno.data
   }
 
   return retorno
 }
 
 /**
- * @returns {{retEnvEvento:{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string}, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}], error: string}}
+ * @returns {{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}], error: string}}
  */
 function montarRetorno(data) {
-  const retorno = {
-    retEnvEvento: {},
-    infEvento: {},
-    error: '',
-  }
+  const retorno = {}
 
   const json = xml2json(data)
 
   if (json.error) {
-    retorno['error'] = json.error || 'Falha ao montar retorno do SEFAZ.'
+    retorno['error'] = json.error
   }
 
   const {
@@ -82,14 +89,12 @@ function montarRetorno(data) {
     retEnvEvento['retEvento'] = []
   }
 
-  retorno['retEnvEvento'] = {
-    idLote: retEnvEvento.idLote || '',
-    tpAmb: retEnvEvento.tpAmb || '',
-    verAplic: retEnvEvento.verAplic || '',
-    cOrgao: retEnvEvento.cOrgao || '',
-    cStat: retEnvEvento.cStat || '',
-    xMotivo: retEnvEvento.xMotivo || '',
-  }
+  retorno['idLote'] = retEnvEvento.idLote || ''
+  retorno['tpAmb'] = retEnvEvento.tpAmb || ''
+  retorno['verAplic'] = retEnvEvento.verAplic || ''
+  retorno['cOrgao'] = retEnvEvento.cOrgao || ''
+  retorno['cStat'] = retEnvEvento.cStat || ''
+  retorno['xMotivo'] = retEnvEvento.xMotivo || ''
 
   retorno['infEvento'] = retEnvEvento.retEvento.map(({ infEvento }) => {
     return {

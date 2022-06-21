@@ -22,7 +22,7 @@ class RecepcaoEvento {
    * @param {string} [opts.cert]
    * @param {string} [opts.key]
    * @param {string} opts.cnpj
-   * @param {string} opts.tpAmb
+   * @param {'1' | '2'} opts.tpAmb
    * @param {string} [opts.timezone = 'America/Sao_Paulo']
    * @param {Object} [opts.options]
    * @param {Object} [opts.options.requestOptions]
@@ -75,7 +75,7 @@ class RecepcaoEvento {
   /**
    * @param {Object} options
    * @param {string} [options.idLote = '1']
-   * @param {{chNFe: string, tipoEvento: number, justificativa?: string}[]} options.lote
+   * @param {{chNFe: string, tipoEvento: 210200 | 210210 | 210220 | 210240, justificativa?: string}[]} options.lote
    */
   enviarEvento(options) {
     const { idLote = '1', lote = [] } = options || {}

@@ -4,6 +4,9 @@ const schemaDistribuicaoDFe = require('../schema/distribuicaoDFe')
 const Client = require('../services/client-service')
 const { enveloparXml, json2xml, unzip, xml2json } = require('../util')
 
+/**
+ * @returns {Promise<{data:{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string, docZip:[{xml: string,json: Object,nsu: string,schema: string}]}, error: string, reqXml: string, resXml: string, status: number}>}
+ */
 exports.enviar = async (opts) => {
   const schema = schemaDistribuicaoDFe.schema(opts)
   const xml = json2xml(schema)
@@ -27,32 +30,36 @@ exports.enviar = async (opts) => {
 
   const json = await montarRetorno(consultaRetorno.data)
 
-  if (Math.floor(consultaRetorno.status / 100) > 2 && !json.error)
-    json['error'] = consultaRetorno.data
-
   const retorno = {
-    ...consultaRetorno,
     data: json,
-    xml: consultaRetorno.data,
+    reqXml: data,
+    resXml: consultaRetorno.data,
+    status: consultaRetorno.status,
+  }
+
+  if (json.error) {
+    retorno['data'] = {}
+    retorno['error'] = json.error
+  }
+
+  if (Math.floor(consultaRetorno.status / 100) > 2 && !json.error) {
+    retorno['data'] = {}
+    retorno['error'] = consultaRetorno.data
   }
 
   return retorno
 }
 
 /**
- * @returns {Promise<{retDistDFeInt:{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string}, docZip:[{xml: string,json: Object,nsu: string,schema: string}], error: string}>}
+ * @returns {Promise<{tpAmb: string,verAplic: string,cStat: string,xMotivo: string,dhResp: string,ultNSU: string,maxNSU: string, docZip:[{xml: string,json: Object,nsu: string,schema: string}], error: string}>}
  */
 async function montarRetorno(data) {
-  const retorno = {
-    retDistDFeInt: {},
-    docZip: [],
-    error: '',
-  }
+  const retorno = {}
 
   const json = xml2json(data)
 
   if (json.error) {
-    retorno['error'] = json.error || 'Falha ao montar retorno do SEFAZ.'
+    retorno['error'] = json.error
   }
 
   const {
@@ -88,15 +95,13 @@ async function montarRetorno(data) {
     })
   )
 
-  retorno['retDistDFeInt'] = {
-    tpAmb: retDistDFeInt.tpAmb || '',
-    verAplic: retDistDFeInt.verAplic || '',
-    cStat: retDistDFeInt.cStat || '',
-    xMotivo: retDistDFeInt.xMotivo || '',
-    dhResp: retDistDFeInt.dhResp || '',
-    ultNSU: retDistDFeInt.ultNSU || '',
-    maxNSU: retDistDFeInt.maxNSU || '',
-  }
+  retorno['tpAmb'] = retDistDFeInt.tpAmb || ''
+  retorno['verAplic'] = retDistDFeInt.verAplic || ''
+  retorno['cStat'] = retDistDFeInt.cStat || ''
+  retorno['xMotivo'] = retDistDFeInt.xMotivo || ''
+  retorno['dhResp'] = retDistDFeInt.dhResp || ''
+  retorno['ultNSU'] = retDistDFeInt.ultNSU || ''
+  retorno['maxNSU'] = retDistDFeInt.maxNSU || ''
 
   retorno['docZip'] = docZip
 
