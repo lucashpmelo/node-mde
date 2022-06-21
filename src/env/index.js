@@ -11,5 +11,5 @@ module.exports = {
     1: 'https://www1.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',
     2: 'https://hom1.nfe.fazenda.gov.br/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',
   },
-  version: '0.9.0',
+  version: '0.9.1',
 }
