@@ -34,13 +34,16 @@ const distribuicao = new DistribuicaoDFe({
   tpAmb: tpAmb,
 })
 
-const retorno = await distribuicao.consultaUltNSU('000000000000000')
+/**
+ * ultNSU: Último NSU recebido pelo ator.
+ */
+const consultaUltNSU = await distribuicao.consultaUltNSU('000000000000000')
 
-if (retorno.error) {
-  throw new Error(retorno.error)
+if (consultaUltNSU.error) {
+  throw new Error(consultaUltNSU.error)
 }
 
-console.log(retorno)
+console.log(consultaUltNSU)
 // {
 //   data: {
 //     tpAmb: '2',
@@ -69,6 +72,74 @@ console.log(retorno)
 //   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
 //   status: 200,
 // }
+
+/**
+ * chNFe: Chave de acesso específica.
+ */
+const consultaChNFe = await distribuicao.consultaChNFe(
+  '41000000000000000000000000000000000000000039'
+)
+
+if (consultaChNFe.error) {
+  throw new Error(consultaChNFe.error)
+}
+
+console.log(consultaChNFe)
+// {
+//   data: {
+//     tpAmb: '2',
+//     verAplic: '1.5.11',
+//     cStat: '138',
+//     xMotivo: 'Documento localizado',
+//     dhResp: '2022-06-21T10:49:21-03:00',
+//     ultNSU: '',
+//     maxNSU: '',
+//     docZip: [
+//       {
+//         xml: '<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe"> ... </nfeProc>',
+//         json: { nfeProc: { ... } },
+//         nsu: '000000000000050',
+//         schema: 'procNFe_v4.00.xsd',
+//       },
+//     ],
+//   },
+//   reqXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap12:Body></soap12:Envelope>',
+//   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
+//   status: 200,
+// }
+
+/**
+ * NSU: Número Sequencial Único.
+ */
+const consultaNSU = await distribuicao.consultaNSU('000000000000049')
+
+if (consultaNSU.error) {
+  throw new Error(consultaNSU.error)
+}
+
+console.log(consultaNSU)
+// {
+//   data: {
+//     tpAmb: '2',
+//     verAplic: '1.5.11',
+//     cStat: '138',
+//     xMotivo: 'Documento localizado',
+//     dhResp: '2022-06-21T10:50:46-03:00',
+//     ultNSU: '000000000000049',
+//     maxNSU: '000000000000212',
+//     docZip: [
+//       {
+//         xml: '<resNFe xmlns:xsd="http://www.w3.org/2001/XMLSchema" ... </resNFe>',
+//         json: { resNFe: { ... } },
+//         nsu: '000000000000049',
+//         schema: 'resNFe_v1.01.xsd',
+//       },
+//     ],
+//   },
+//   reqXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap12:Body></soap12:Envelope>',
+//   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
+//   status: 200,
+// }
 ```
 
 ### Manifestação do Destinatário
@@ -89,10 +160,15 @@ const recepcao = new RecepcaoEvento({
   tpAmb: tpAmb,
 })
 
+/**
+ * chNFe: Chave de Acesso da NF-e vinculada ao Evento
+ * tpEvento: Código do evento: 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada
+ * justificativa: Informar a justificativa porque a operação não foi realizada, este campo deve ser informado somente no evento de Operação não Realizada.
+ */
 const lote = [
   {
     chNFe: '41000000000000000000000000000000000000000040',
-    tipoEvento: 210210, // 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada
+    tipoEvento: 210210,
   },
   {
     chNFe: '41000000000000000000000000000000000000000041',
@@ -101,16 +177,16 @@ const lote = [
   },
 ]
 
-const retorno = await recepcao.enviarEvento({
+const manifestacao = await recepcao.enviarEvento({
   idLote: '1337',
   lote: lote,
 })
 
-if (retorno.error) {
-  throw new Error(retorno.error)
+if (manifestacao.error) {
+  throw new Error(manifestacao.error)
 }
 
-console.log(retorno)
+console.log(manifestacao)
 // {
 //   data: {
 //     idLote: '1337',
@@ -130,7 +206,9 @@ console.log(retorno)
 //         tpEvento: '210210',
 //         xEvento: 'Ciencia da Operacao',
 //         nSeqEvento: '1',
-//         dhRegEvento: '2022-06-21T11:20:10-03:00'
+//         CNPJDest: '',
+//         dhRegEvento: '2022-06-21T11:20:10-03:00',
+//         nProt: ''
 //       },
 //       {
 //         tpAmb: '2',
@@ -142,7 +220,9 @@ console.log(retorno)
 //         tpEvento: '210240',
 //         xEvento: 'Operacao nao Realizada',
 //         nSeqEvento: '1',
-//         dhRegEvento: '2022-06-21T11:20:10-03:00'
+//         CNPJDest: '12345678901234',
+//         dhRegEvento: '2022-06-21T11:20:10-03:00',
+//         nProt: '891220000003301'
 //       },
 //     ],
 //   },
