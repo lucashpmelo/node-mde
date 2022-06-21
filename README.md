@@ -36,12 +36,39 @@ const distribuicao = new DistribuicaoDFe({
 
 const retorno = await distribuicao.consultaUltNSU('000000000000000')
 
-if (retorno.data.error) {
-  throw new Error(retorno.data.error)
+if (retorno.error) {
+  throw new Error(retorno.error)
 }
 
-console.log(retorno.data)
-console.log(retorno.xml)
+console.log(retorno)
+// {
+//   data: {
+//     tpAmb: '2',
+//     verAplic: '1.5.11',
+//     cStat: '138',
+//     xMotivo: 'Documento(s) localizado(s)',
+//     dhResp: '2022-06-21T10:48:14-03:00',
+//     ultNSU: '000000000000050',
+//     maxNSU: '000000000000212',
+//     docZip: [
+//       {
+//         xml: '<resNFe xmlns:xsd="http://www.w3.org/2001/XMLSchema" ... </resNFe>',
+//         json: { resNFe: { ... } },
+//         nsu: '000000000000049',
+//         schema: 'resNFe_v1.01.xsd',
+//       },
+//       {
+//         xml: '<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe"> ... </nfeProc>',
+//         json: { nfeProc: { ... } },
+//         nsu: '000000000000050',
+//         schema: 'procNFe_v4.00.xsd',
+//       },
+//     ],
+//   },
+//   reqXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap12:Body></soap12:Envelope>',
+//   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
+//   status: 200,
+// }
 ```
 
 ### Manifestação do Destinatário
@@ -79,10 +106,48 @@ const retorno = await recepcao.enviarEvento({
   lote: lote,
 })
 
-if (retorno.data.error) {
-  throw new Error(retorno.data.error)
+if (retorno.error) {
+  throw new Error(retorno.error)
 }
 
-console.log(retorno.data)
-console.log(retorno.xml)
+console.log(retorno)
+// {
+//   data: {
+//     idLote: '1337',
+//     tpAmb: '2',
+//     verAplic: 'AN_1.4.3',
+//     cOrgao: '91',
+//     cStat: '128',
+//     xMotivo: 'Lote de evento processado',
+//     infEvento: [
+//       {
+//         tpAmb: '2',
+//         verAplic: 'AN_1.4.3',
+//         cOrgao: '91',
+//         cStat: '596',
+//         xMotivo: 'Rejeicao: Evento apresentado apos o prazo permitido para o evento: [10 dias]',
+//         chNFe: '41000000000000000000000000000000000000000040',
+//         tpEvento: '210210',
+//         xEvento: 'Ciencia da Operacao',
+//         nSeqEvento: '1',
+//         dhRegEvento: '2022-06-21T11:20:10-03:00'
+//       },
+//       {
+//         tpAmb: '2',
+//         verAplic: 'AN_1.4.3',
+//         cOrgao: '91',
+//         cStat: '135',
+//         xMotivo: 'Evento registrado e vinculado a NF-e',
+//         chNFe: '41000000000000000000000000000000000000000041',
+//         tpEvento: '210240',
+//         xEvento: 'Operacao nao Realizada',
+//         nSeqEvento: '1',
+//         dhRegEvento: '2022-06-21T11:20:10-03:00'
+//       },
+//     ],
+//   },
+//   reqXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap12:Body></soap12:Envelope>',
+//   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
+//   status: 200,
+// }
 ```
