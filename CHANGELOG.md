@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.9.0] / 2022-06-21
+
 ### Corrigido
 
 - Assinatura XML
@@ -160,7 +162,8 @@
 - - 210220 - Desconhecimento da Operação
 - - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.8.0...HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.9.0..HEAD
+[0.9.0]: https://github.com/lucashpmelo/node-mde/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/lucashpmelo/node-mde/compare/0.7.3...0.8.0
 [0.7.3]: https://github.com/lucashpmelo/node-mde/compare/0.7.2...0.7.3
 [0.7.2]: https://github.com/lucashpmelo/node-mde/compare/0.7.1...0.7.2
