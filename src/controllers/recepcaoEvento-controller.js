@@ -5,7 +5,7 @@ const Client = require('../services/client-service')
 const { assinaturaXml, enveloparXml, json2xml, xml2json } = require('../util')
 
 /**
- * @returns {Promise<{data:{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}]}, error: string, reqXml: string, resXml: string, status: number}>}
+ * @returns {Promise<{data:{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,CNPJDest: string,dhRegEvento: string,nProt: string}]}, error: string, reqXml: string, resXml: string, status: number}>}
  */
 exports.enviar = async (opts) => {
   const eventosXML = opts.eventos.map((evento) => {
@@ -62,7 +62,7 @@ exports.enviar = async (opts) => {
 }
 
 /**
- * @returns {{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,dhRegEvento: string}], error: string}}
+ * @returns {{idLote: string,tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string, infEvento:[{tpAmb: string,verAplic: string,cOrgao: string,cStat: string,xMotivo: string,chNFe: string,tpEvento: string,xEvento: string,nSeqEvento: string,CNPJDest: string,dhRegEvento: string,nProt: string}], error: string}}
  */
 function montarRetorno(data) {
   const retorno = {}
