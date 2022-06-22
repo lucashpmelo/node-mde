@@ -17,9 +17,9 @@ $ npm i node-mde
 
 ### Consulta por ultNSU
 
-| Campo    | Tipo     | Tamanho | Descrição                      |
-| -------- | -------- | ------- | ------------------------------ |
-| `ultNSU` | _string_ | 1-15    | Último NSU recebido pelo ator. |
+| Campo    |   Tipo   | Tamanho | Descrição                      |
+| :------- | :------: | :-----: | :----------------------------- |
+| `ultNSU` | _string_ |  1-15   | Último NSU recebido pelo ator. |
 
 #### Exemplo
 
@@ -74,9 +74,9 @@ console.log(consulta)
 
 ### Consulta por chNFe
 
-| Campo   | Tipo     | Tamanho | Descrição                   |
-| ------- | -------- | ------- | --------------------------- |
-| `chNFe` | _string_ | 44      | Chave de acesso específica. |
+| Campo   |   Tipo   | Tamanho | Descrição                   |
+| :------ | :------: | :-----: | :-------------------------- |
+| `chNFe` | _string_ |   44    | Chave de acesso específica. |
 
 #### Exemplo
 
@@ -127,9 +127,9 @@ console.log(consulta)
 
 ### Consulta por NSU
 
-| Campo | Tipo     | Tamanho | Descrição                           |
-| ----- | -------- | ------- | ----------------------------------- |
-| `NSU` | _string_ | 1-15    | Número Sequencial Único específico. |
+| Campo |   Tipo   | Tamanho | Descrição                           |
+| :---- | :------: | :-----: | :---------------------------------- |
+| `NSU` | _string_ |  1-15   | Número Sequencial Único específico. |
 
 #### Exemplo
 
@@ -178,12 +178,12 @@ console.log(consulta)
 
 ## Manifestação do Destinatário
 
-| Campo                | Tipo     | Tamanho | Descrição                                                                                                                                                |
-| -------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `idLote`             | _string_ | 1-15    | Identificador de controle do Lote de envio do Evento.                                                                                                    |
-| `lote`               | _array_  | 1-20    | Lista de eventos para manifestação.                                                                                                                      |
-| `lote.chNFe`         | _string_ | 44      | Chave de Acesso da NF-e vinculada ao Evento.                                                                                                             |
-| `lote.tpEvento`      | _number_ | 6       | Código do evento: 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada. |
+| Campo                |   Tipo   | Tamanho | Descrição                                                                                                                                                |
+| :------------------- | :------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `idLote`             | _string_ |  1-15   | Identificador de controle do Lote de envio do Evento.                                                                                                    |
+| `lote`               | _array_  |  1-20   | Lista de eventos para manifestação.                                                                                                                      |
+| `lote.chNFe`         | _string_ |   44    | Chave de Acesso da NF-e vinculada ao Evento.                                                                                                             |
+| `lote.tpEvento`      | _number_ |    6    | Código do evento: 210200 - Confirmacao da Operacao; 210210 - Ciencia da Operacao; 210220 - Desconhecimento da Operacao; 210240 - Operacao nao Realizada. |
 | `lote.justificativa` | _string_ | 15-255  | Informar a justificativa porque a operação não foi realizada, este campo deve ser informado somente no evento de Operação não Realizada.                 |
 
 #### Exemplo
