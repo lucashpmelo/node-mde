@@ -10,40 +10,38 @@ $ npm i node-mde
 
 ## Pré-Requisitos
 
-- Possuir um _Certificado A1_ válido podendo ser no formato PFX e Senha _OU_ cert.pem e key.pem
+- Possuir um **Certificado A1** válido emitido por uma Autoridade Certificadora credenciada pela Infraestrutura de Chaves Públicas Brasileira – **ICP-Brasil**.
+- O certificado pode ser usando no formato **PFX** e **Senha** _OU_ **cert.pem** e **key.pem**
 
-## Exemplo
+## Distribuição de DF-e
 
-### Distribuição de DF-e
+### Consulta por ultNSU
+
+| Campo    | Tipo     | Tamanho | Descrição                      |
+| -------- | -------- | ------- | ------------------------------ |
+| `ultNSU` | _string_ | 1-15    | Último NSU recebido pelo ator. |
+
+#### Exemplo
 
 ```js
 const { DistribuicaoDFe } = require('node-mde')
 const fs = require('fs')
 
-const pfx = fs.readFileSync('./certificado.pfx')
-const passphrase = 'senha'
-const cnpj = '12345678901234'
-const cUFAutor = '41' //PR
-const tpAmb = '2' //Produção="1"/Homologação="2"
-
 const distribuicao = new DistribuicaoDFe({
-  pfx: pfx,
-  passphrase: passphrase,
-  cnpj: cnpj,
-  cUFAutor: cUFAutor,
-  tpAmb: tpAmb,
+  pfx: fs.readFileSync('./certificado.pfx'),
+  passphrase: 'senha',
+  cnpj: '12345678901234',
+  cUFAutor: '41',
+  tpAmb: '2',
 })
 
-/**
- * ultNSU: Último NSU recebido pelo ator.
- */
-const consultaUltNSU = await distribuicao.consultaUltNSU('000000000000000')
+const consulta = await distribuicao.consultaUltNSU('000000000000000')
 
-if (consultaUltNSU.error) {
-  throw new Error(consultaUltNSU.error)
+if (consulta.error) {
+  throw new Error(consulta.error)
 }
 
-console.log(consultaUltNSU)
+console.log(consulta)
 // {
 //   data: {
 //     tpAmb: '2',
@@ -72,19 +70,37 @@ console.log(consultaUltNSU)
 //   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
 //   status: 200,
 // }
+```
 
-/**
- * chNFe: Chave de acesso específica.
- */
-const consultaChNFe = await distribuicao.consultaChNFe(
+### Consulta por chNFe
+
+| Campo   | Tipo     | Tamanho | Descrição                   |
+| ------- | -------- | ------- | --------------------------- |
+| `chNFe` | _string_ | 44      | Chave de acesso específica. |
+
+#### Exemplo
+
+```js
+const { DistribuicaoDFe } = require('node-mde')
+const fs = require('fs')
+
+const distribuicao = new DistribuicaoDFe({
+  pfx: fs.readFileSync('./certificado.pfx'),
+  passphrase: 'senha',
+  cnpj: '12345678901234',
+  cUFAutor: '41',
+  tpAmb: '2',
+})
+
+const consulta = await distribuicao.consultaChNFe(
   '41000000000000000000000000000000000000000039'
 )
 
-if (consultaChNFe.error) {
-  throw new Error(consultaChNFe.error)
+if (consulta.error) {
+  throw new Error(consulta.error)
 }
 
-console.log(consultaChNFe)
+console.log(consulta)
 // {
 //   data: {
 //     tpAmb: '2',
@@ -107,17 +123,35 @@ console.log(consultaChNFe)
 //   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
 //   status: 200,
 // }
+```
 
-/**
- * NSU: Número Sequencial Único.
- */
-const consultaNSU = await distribuicao.consultaNSU('000000000000049')
+### Consulta por NSU
 
-if (consultaNSU.error) {
-  throw new Error(consultaNSU.error)
+| Campo | Tipo     | Tamanho | Descrição                           |
+| ----- | -------- | ------- | ----------------------------------- |
+| `NSU` | _string_ | 1-15    | Número Sequencial Único específico. |
+
+#### Exemplo
+
+```js
+const { DistribuicaoDFe } = require('node-mde')
+const fs = require('fs')
+
+const distribuicao = new DistribuicaoDFe({
+  pfx: fs.readFileSync('./certificado.pfx'),
+  passphrase: 'senha',
+  cnpj: '12345678901234',
+  cUFAutor: '41',
+  tpAmb: '2',
+})
+
+const consulta = await distribuicao.consultaNSU('000000000000049')
+
+if (consulta.error) {
+  throw new Error(consulta.error)
 }
 
-console.log(consultaNSU)
+console.log(consulta)
 // {
 //   data: {
 //     tpAmb: '2',
@@ -142,29 +176,29 @@ console.log(consultaNSU)
 // }
 ```
 
-### Manifestação do Destinatário
+## Manifestação do Destinatário
+
+| Campo                | Tipo     | Tamanho | Descrição                                                                                                                                                |
+| -------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `idLote`             | _string_ | 1-15    | Identificador de controle do Lote de envio do Evento.                                                                                                    |
+| `lote`               | _array_  | 1-20    | Lista de eventos para manifestação.                                                                                                                      |
+| `lote.chNFe`         | _string_ | 44      | Chave de Acesso da NF-e vinculada ao Evento.                                                                                                             |
+| `lote.tpEvento`      | _number_ | 6       | Código do evento: 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada. |
+| `lote.justificativa` | _string_ | 15-255  | Informar a justificativa porque a operação não foi realizada, este campo deve ser informado somente no evento de Operação não Realizada.                 |
+
+#### Exemplo
 
 ```js
 const { RecepcaoEvento } = require('node-mde')
 const fs = require('fs')
 
-const pfx = fs.readFileSync('./certificado.pfx')
-const passphrase = 'senha'
-const cnpj = '12345678901234'
-const tpAmb = '2' //Produção="1"/Homologação="2"
-
 const recepcao = new RecepcaoEvento({
-  pfx: pfx,
-  passphrase: passphrase,
-  cnpj: cnpj,
-  tpAmb: tpAmb,
+  pfx: fs.readFileSync('./certificado.pfx'),
+  passphrase: 'senha',
+  cnpj: '12345678901234',
+  tpAmb: '2',
 })
 
-/**
- * chNFe: Chave de Acesso da NF-e vinculada ao Evento
- * tpEvento: Código do evento: 210200 - Confirmacao da Operacao, 210210 - Ciencia da Operacao, 210220 - Desconhecimento da Operacao, 210240 - Operacao nao Realizada
- * justificativa: Informar a justificativa porque a operação não foi realizada, este campo deve ser informado somente no evento de Operação não Realizada.
- */
 const lote = [
   {
     chNFe: '41000000000000000000000000000000000000000040',
@@ -177,10 +211,6 @@ const lote = [
   },
 ]
 
-/**
- * idLote: Identificador de controle do Lote de envio do Evento.
- * lote: Um lote pode conter até 20 eventos.
- */
 const manifestacao = await recepcao.enviarEvento({
   idLote: '1337',
   lote: lote,
