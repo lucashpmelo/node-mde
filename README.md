@@ -17,16 +17,21 @@ $ npm i node-mde
 
 ### Construtor
 
-#### new DistribuicaoDFe(options)
+```js
+new DistribuicaoDFe([opts])
+```
 
-- `options` Opções
-  - `pfx` - Buffer do arquivo .pfx
-  - `passphrase` - Senha do arquivo .pfx
-  - `cert` - String do _cert.pem_
-  - `key` - String do _key.pem_
-  - `cUFAutor` - Código da UF do autor
-  - `cnpj` - CNPJ do autor
-  - `tpAmb` - Identificação de Ambiente
+- `opts` `<Object>`
+  - `pfx` `<Buffer>` - [OPCIONAL] - Arquivo **.pfx**. Se o `pfx` não for informado, as propriedades `cert` e `key` passam a ser obrigatórias.
+  - `passphrase` `<String>` - [OPCIONAL] - Senha do arquivo **.pfx**.
+  - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
+  - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
+  - `cUFAutor` `<String>` - [OBRIGATÓRIO] - Código da UF do autor. Consulte a tabela [Códigos UF](#códigos-uf).
+  - `cnpj` `<String>` - [OBRIGATÓRIO] - CNPJ do autor.
+  - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
+  - `options` `<Object>` - [OPCIONAL]
+    - `requestOptions` `<AxiosRequestConfig>` - [OPCIONAL]
+    - `httpsOptions` `<AgentOptions>` - [OPCIONAL]
 
 ### Consulta por ultNSU
 
@@ -193,16 +198,21 @@ console.log(consulta)
 
 ### Construtor
 
-#### new RecepcaoEvento(options)
+```js
+new RecepcaoEvento([opts])
+```
 
-- `options` Opções
-  - `pfx` - Buffer do arquivo .pfx
-  - `passphrase` - Senha do arquivo .pfx
-  - `cert` - String do _cert.pem_
-  - `key` - String do _key.pem_
-  - `cnpj` - CNPJ do autor
-  - `tpAmb` - Identificação de Ambiente
-  - `timezone` - Fuso horario do autor
+- `opts` `<Object>`
+  - `pfx` `<Buffer>` - [OPCIONAL] - Arquivo **.pfx**. Se o `pfx` não for informado, as propriedades `cert` e `key` passam a ser obrigatórias.
+  - `passphrase` `<String>` - [OPCIONAL] - Senha do arquivo **.pfx**.
+  - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
+  - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
+  - `cnpj` `<String>` - [OBRIGATÓRIO] - CNPJ do autor.
+  - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
+  - `timezone` `<String>` - [OPCIONAL] - Fuso horário do autor. É utilizado `'America/Sao_Paulo'` como valor padrão. Consulte a tabela [Lista de Timezones](#lista-de-timezones) válidos para o Brasil.
+  - `options` `<Object>` - [OPCIONAL]
+    - `requestOptions` `<AxiosRequestConfig>` - [OPCIONAL]
+    - `httpsOptions` `<AgentOptions>` - [OPCIONAL]
 
 ### Enviar Lote de Eventos
 
@@ -296,7 +306,7 @@ console.log(manifestacao)
 
 ## Tabelas
 
-### UF
+### Códigos UF
 
 |  UF  | cUF  | Estado                  |
 | :--: | :--: | :---------------------- |
@@ -328,7 +338,7 @@ console.log(manifestacao)
 | `GO` | _52_ | **Goiás**               |
 | `DF` | _53_ | **Distrito Federal**    |
 
-### Timezones
+### Lista de Timezones
 
 |        timezone        | Estado                                 |   UTC    |
 | :--------------------: | :------------------------------------- | :------: |
