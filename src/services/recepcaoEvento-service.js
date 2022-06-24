@@ -25,8 +25,8 @@ class RecepcaoEvento {
    * @param {'1' | '2'} opts.tpAmb
    * @param {string} [opts.timezone = 'America/Sao_Paulo']
    * @param {Object} [opts.options]
-   * @param {Object} [opts.options.requestOptions]
-   * @param {Object} [opts.options.httpsOptions]
+   * @param {import('axios').AxiosRequestConfig} [opts.options.requestOptions]
+   * @param {import('https').AgentOptions} [opts.options.httpsOptions]
    */
   constructor(opts) {
     const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
