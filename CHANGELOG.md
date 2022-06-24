@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.9.2] / 2022-06-24
+
 ### Corrigido
 
 - Types
