@@ -15,6 +15,19 @@ $ npm i node-mde
 
 ## Distribuição de DF-e
 
+### Construtor
+
+#### new DistribuicaoDFe(options)
+
+- `options` Opções
+  - `pfx` - Buffer do arquivo .pfx
+  - `passphrase` - Senha do arquivo .pfx
+  - `cert` - String do _cert.pem_
+  - `key` - String do _key.pem_
+  - `cUFAutor` - Código da UF do autor
+  - `cnpj` - CNPJ do autor
+  - `tpAmb` - Identificação de Ambiente
+
 ### Consulta por ultNSU
 
 | Campo    |   Tipo   | Tamanho | Descrição                      |
@@ -178,6 +191,21 @@ console.log(consulta)
 
 ## Manifestação do Destinatário
 
+### Construtor
+
+#### new RecepcaoEvento(options)
+
+- `options` Opções
+  - `pfx` - Buffer do arquivo .pfx
+  - `passphrase` - Senha do arquivo .pfx
+  - `cert` - String do _cert.pem_
+  - `key` - String do _key.pem_
+  - `cnpj` - CNPJ do autor
+  - `tpAmb` - Identificação de Ambiente
+  - `timezone` - Fuso horario do autor
+
+### Enviar Lote de Eventos
+
 | Campo                |   Tipo   | Tamanho | Descrição                                                                                                                                                |
 | :------------------- | :------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `idLote`             | _string_ |  1-15   | Identificador de controle do Lote de envio do Evento.                                                                                                    |
@@ -265,3 +293,58 @@ console.log(manifestacao)
 //   status: 200,
 // }
 ```
+
+## Tabelas
+
+### UF
+
+|  UF  |  cUF   | Estado                  |
+| :--: | :----: | :---------------------- |
+| `RO` | _'11'_ | **Rondônia**            |
+| `AC` | _'12'_ | **Acre**                |
+| `AM` | _'13'_ | **Amazonas**            |
+| `RR` | _'14'_ | **Roraima**             |
+| `PA` | _'15'_ | **Pará**                |
+| `AP` | _'16'_ | **Amapá**               |
+| `TO` | _'17'_ | **Tocantins**           |
+| `MA` | _'21'_ | **Maranhão**            |
+| `PI` | _'22'_ | **Piauí**               |
+| `CE` | _'23'_ | **Ceará**               |
+| `RN` | _'24'_ | **Rio Grande do Norte** |
+| `PB` | _'25'_ | **Paraíba**             |
+| `PE` | _'26'_ | **Pernambuco**          |
+| `AL` | _'27'_ | **Alagoas**             |
+| `SE` | _'28'_ | **Sergipe**             |
+| `BA` | _'29'_ | **Bahia**               |
+| `MG` | _'31'_ | **Minas Gerais**        |
+| `ES` | _'32'_ | **Espírito Santo**      |
+| `RJ` | _'33'_ | **Rio de Janeiro**      |
+| `SP` | _'35'_ | **São Paulo**           |
+| `PR` | _'41'_ | **Paraná**              |
+| `SC` | _'42'_ | **Santa Catarina**      |
+| `RS` | _'43'_ | **Rio Grande do Sul**   |
+| `MS` | _'50'_ | **Mato Grosso do Sul**  |
+| `MT` | _'51'_ | **Mato Grosso**         |
+| `GO` | _'52'_ | **Goiás**               |
+| `DF` | _'53'_ | **Distrito Federal**    |
+
+### Timezones
+
+|         timezone         | Estado                                 |   UTC    |
+| :----------------------: | :------------------------------------- | :------: |
+|   `'America/Noronha'`    | **Fernando de Noronha**                | _−02:00_ |
+|  `'America/Araguaina'`   | **TO**                                 | _−03:00_ |
+|    `'America/Bahia'`     | **BA**                                 | _−03:00_ |
+|    `'America/Belem'`     | **AP, PA (leste)**                     | _−03:00_ |
+|  `'America/Fortaleza'`   | **CE, MA, PB, PI, RN**                 | _−03:00_ |
+|    `'America/Maceio'`    | **AL, SE**                             | _−03:00_ |
+|    `'America/Recife'`    | **PE**                                 | _−03:00_ |
+|   `'America/Santarem'`   | **PA (oeste)**                         | _−03:00_ |
+|  `'America/Sao_Paulo'`   | **DF, ES, GO, MG, PR, RJ, RS, SC, SP** | _−03:00_ |
+|  `'America/Boa_Vista'`   | **RR**                                 | _−04:00_ |
+| `'America/Campo_Grande'` | **MS**                                 | _−04:00_ |
+|    `'America/Cuiaba'`    | **MT**                                 | _−04:00_ |
+|    `'America/Manaus'`    | **AM (leste)**                         | _−04:00_ |
+| `'America/Porto_Velho'`  | **RO**                                 | _−04:00_ |
+|   `'America/Eirunepe'`   | **AM (oeste)**                         | _−05:00_ |
+|  `'America/Rio_Branco'`  | **AC**                                 | _−05:00_ |
