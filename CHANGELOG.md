@@ -2,6 +2,14 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- Imutabilidade aos serviços de `DistribuicaoDFe` e `RecepcaoEvento`
+
+### Modificado
+
+- Os métodos `consultaUltNSU`, `consultaChNFe`, `consultaNSU` e `enviarEvento` agora são funções puras e não alteram mais o objeto construído
+
 ## [0.9.2] / 2022-06-24
 
 ### Corrigido

@@ -61,7 +61,7 @@ class RecepcaoEvento {
       throw new Error('Ambiente não informado.')
     }
 
-    this.opts = {
+    this.opts = Object.freeze({
       cnpj: opts.cnpj,
       tpAmb: opts.tpAmb,
       timezone: opts.timezone || 'America/Sao_Paulo',
@@ -69,7 +69,9 @@ class RecepcaoEvento {
       key: key,
       requestOptions: requestOptions,
       httpsOptions: httpsOptions,
-    }
+    })
+
+    Object.freeze(this)
   }
 
   /**
@@ -80,7 +82,7 @@ class RecepcaoEvento {
   enviarEvento(options) {
     const { idLote = '1', lote = [] } = options || {}
 
-    const opts = this.opts
+    const opts = { ...this.opts }
 
     const LOTE_MIN_LENGTH = 1
     const LOTE_MAX_LENGTH = 20

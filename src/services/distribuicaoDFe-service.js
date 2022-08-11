@@ -54,7 +54,7 @@ class DistribuicaoDFe {
       throw new Error('Ambiente não informado.')
     }
 
-    this.opts = {
+    this.opts = Object.freeze({
       cUFAutor: opts.cUFAutor,
       cnpj: opts.cnpj,
       tpAmb: opts.tpAmb,
@@ -62,7 +62,9 @@ class DistribuicaoDFe {
       key: key,
       requestOptions: requestOptions,
       httpsOptions: httpsOptions,
-    }
+    })
+
+    Object.freeze(this)
   }
 
   /**
@@ -79,13 +81,16 @@ class DistribuicaoDFe {
       throw new Error('NSU com tamanho incorreto.')
     }
 
-    this.opts['pesquisa'] = {
-      grupo: 'distNSU',
-      consulta: 'ultNSU',
-      valor: zeroPad(ultNSU, 15),
+    const opts = {
+      ...this.opts,
+      pesquisa: {
+        grupo: 'distNSU',
+        consulta: 'ultNSU',
+        valor: zeroPad(ultNSU, 15),
+      },
     }
 
-    return controllerDistribuicaoDFe.enviar(this.opts)
+    return controllerDistribuicaoDFe.enviar(opts)
   }
 
   /**
@@ -102,13 +107,16 @@ class DistribuicaoDFe {
       throw new Error('chNFe com tamanho incorreto.')
     }
 
-    this.opts['pesquisa'] = {
-      grupo: 'consChNFe',
-      consulta: 'chNFe',
-      valor: chNFe,
+    const opts = {
+      ...this.opts,
+      pesquisa: {
+        grupo: 'consChNFe',
+        consulta: 'chNFe',
+        valor: chNFe,
+      },
     }
 
-    return controllerDistribuicaoDFe.enviar(this.opts)
+    return controllerDistribuicaoDFe.enviar(opts)
   }
 
   /**
@@ -128,13 +136,16 @@ class DistribuicaoDFe {
       throw new Error('NSU com tamanho incorreto.')
     }
 
-    this.opts['pesquisa'] = {
-      grupo: 'consNSU',
-      consulta: 'NSU',
-      valor: zeroPad(nsu, 15),
+    const opts = {
+      ...this.opts,
+      pesquisa: {
+        grupo: 'consNSU',
+        consulta: 'NSU',
+        valor: zeroPad(nsu, 15),
+      },
     }
 
-    return controllerDistribuicaoDFe.enviar(this.opts)
+    return controllerDistribuicaoDFe.enviar(opts)
   }
 }
 
