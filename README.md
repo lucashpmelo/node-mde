@@ -18,15 +18,15 @@ $ npm i node-mde
 ### Construtor
 
 ```js
-new DistribuicaoDFe([opts])
+new DistribuicaoDFe(config)
 ```
 
-- `opts` `<Object>`
+- `config` `<Object>`
   - `pfx` `<Buffer>` - [OPCIONAL] - Arquivo **.pfx**. Se o `pfx` não for informado, as propriedades `cert` e `key` passam a ser obrigatórias.
   - `passphrase` `<String>` - [OPCIONAL] - Senha do arquivo **.pfx**.
   - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
-  - `cUFAutor` `<String>` - [OBRIGATÓRIO] - Código da UF do autor. Consulte a tabela [Códigos UF](#códigos-uf).
+  - `cUFAutor` `<String>` - [OBRIGATÓRIO] - Código da UF do autor. Consulte a tabela [códigos UF](#códigos-uf).
   - `cnpj` `<String>` - [OBRIGATÓRIO] - CNPJ do autor.
   - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
   - `options` `<Object>` - [OPCIONAL]
@@ -199,17 +199,17 @@ console.log(consulta)
 ### Construtor
 
 ```js
-new RecepcaoEvento([opts])
+new RecepcaoEvento(config)
 ```
 
-- `opts` `<Object>`
+- `config` `<Object>`
   - `pfx` `<Buffer>` - [OPCIONAL] - Arquivo **.pfx**. Se o `pfx` não for informado, as propriedades `cert` e `key` passam a ser obrigatórias.
   - `passphrase` `<String>` - [OPCIONAL] - Senha do arquivo **.pfx**.
   - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `cnpj` `<String>` - [OBRIGATÓRIO] - CNPJ do autor.
   - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
-  - `timezone` `<String>` - [OPCIONAL] - Fuso horário do autor. É utilizado `'America/Sao_Paulo'` como valor padrão. Consulte a tabela [Lista de Timezones](#lista-de-timezones) válidos para o Brasil.
+  - `timezone` `<String>` - [OPCIONAL] - Fuso horário do autor. É utilizado `'America/Sao_Paulo'` como valor padrão. Consulte a tabela [lista de timezones](#lista-de-timezones) válidos para o Brasil.
   - `options` `<Object>` - [OPCIONAL]
     - `requestOptions` `<AxiosRequestConfig>` - [OPCIONAL]
     - `httpsOptions` `<AgentOptions>` - [OPCIONAL]
