@@ -6,6 +6,10 @@
 
 - Imutabilidade aos serviços de `DistribuicaoDFe` e `RecepcaoEvento`
 
+### Corrigido
+
+- Types
+
 ### Modificado
 
 - Os métodos `consultaUltNSU`, `consultaChNFe`, `consultaNSU` e `enviarEvento` agora são funções puras e não alteram mais o objeto construído

@@ -16,30 +16,30 @@ const EVENTO = {
 }
 class RecepcaoEvento {
   /**
-   * @param {Object} opts
-   * @param {Buffer} [opts.pfx]
-   * @param {string} [opts.passphrase]
-   * @param {string} [opts.cert]
-   * @param {string} [opts.key]
-   * @param {string} opts.cnpj
-   * @param {'1' | '2'} opts.tpAmb
-   * @param {string} [opts.timezone = 'America/Sao_Paulo']
-   * @param {Object} [opts.options]
-   * @param {import('axios').AxiosRequestConfig} [opts.options.requestOptions]
-   * @param {import('https').AgentOptions} [opts.options.httpsOptions]
+   * @param {Object} config
+   * @param {Buffer} [config.pfx]
+   * @param {string} [config.passphrase]
+   * @param {string} [config.cert]
+   * @param {string} [config.key]
+   * @param {string} config.cnpj
+   * @param {'1' | '2'} config.tpAmb
+   * @param {string} [config.timezone = 'America/Sao_Paulo']
+   * @param {Object} [config.options]
+   * @param {import('axios').AxiosRequestConfig} [config.options.requestOptions]
+   * @param {import('https').AgentOptions} [config.options.httpsOptions]
    */
-  constructor(opts) {
-    const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
+  constructor(config) {
+    const { requestOptions = {}, httpsOptions = {} } = config.options || {}
 
-    let cert = opts.cert || ''
-    let key = opts.key || ''
+    let cert = config.cert || ''
+    let key = config.key || ''
 
-    if (opts.pfx) {
-      if (!opts.passphrase) {
+    if (config.pfx) {
+      if (!config.passphrase) {
         throw new Error('Senha do Certificado não informada.')
       }
 
-      const pfxLoad = convertPFX(opts.pfx, opts.passphrase)
+      const pfxLoad = convertPFX(config.pfx, config.passphrase)
 
       cert = pfxLoad.cert
       key = pfxLoad.key
@@ -53,18 +53,18 @@ class RecepcaoEvento {
       throw new Error('Key não informada.')
     }
 
-    if (!opts.cnpj) {
+    if (!config.cnpj) {
       throw new Error('CNPJ não informado.')
     }
 
-    if (!opts.tpAmb) {
+    if (!config.tpAmb) {
       throw new Error('Ambiente não informado.')
     }
 
-    this.opts = Object.freeze({
-      cnpj: opts.cnpj,
-      tpAmb: opts.tpAmb,
-      timezone: opts.timezone || 'America/Sao_Paulo',
+    this.config = Object.freeze({
+      cnpj: config.cnpj,
+      tpAmb: config.tpAmb,
+      timezone: config.timezone || 'America/Sao_Paulo',
       cert: cert,
       key: key,
       requestOptions: requestOptions,
@@ -82,7 +82,7 @@ class RecepcaoEvento {
   enviarEvento(options) {
     const { idLote = '1', lote = [] } = options || {}
 
-    const opts = { ...this.opts }
+    const opts = { ...this.config }
 
     const LOTE_MIN_LENGTH = 1
     const LOTE_MAX_LENGTH = 20

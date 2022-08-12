@@ -5,30 +5,30 @@ const { convertPFX, zeroPad } = require('../util')
 
 class DistribuicaoDFe {
   /**
-   * @param {Object} opts
-   * @param {Buffer} [opts.pfx]
-   * @param {string} [opts.passphrase]
-   * @param {string} [opts.cert]
-   * @param {string} [opts.key]
-   * @param {string} opts.cUFAutor
-   * @param {string} opts.cnpj
-   * @param {'1' | '2'} opts.tpAmb
-   * @param {Object} [opts.options]
-   * @param {import('axios').AxiosRequestConfig} [opts.options.requestOptions]
-   * @param {import('https').AgentOptions} [opts.options.httpsOptions]
+   * @param {Object} config
+   * @param {Buffer} [config.pfx]
+   * @param {string} [config.passphrase]
+   * @param {string} [config.cert]
+   * @param {string} [config.key]
+   * @param {string} config.cUFAutor
+   * @param {string} config.cnpj
+   * @param {'1' | '2'} config.tpAmb
+   * @param {Object} [config.options]
+   * @param {import('axios').AxiosRequestConfig} [config.options.requestOptions]
+   * @param {import('https').AgentOptions} [config.options.httpsOptions]
    */
-  constructor(opts) {
-    const { requestOptions = {}, httpsOptions = {} } = opts.options || {}
+  constructor(config) {
+    const { requestOptions = {}, httpsOptions = {} } = config.options || {}
 
-    let cert = opts.cert || ''
-    let key = opts.key || ''
+    let cert = config.cert || ''
+    let key = config.key || ''
 
-    if (opts.pfx) {
-      if (!opts.passphrase) {
+    if (config.pfx) {
+      if (!config.passphrase) {
         throw new Error('Senha do Certificado não informada.')
       }
 
-      const pfxLoad = convertPFX(opts.pfx, opts.passphrase)
+      const pfxLoad = convertPFX(config.pfx, config.passphrase)
 
       cert = pfxLoad.cert
       key = pfxLoad.key
@@ -42,22 +42,22 @@ class DistribuicaoDFe {
       throw new Error('Key não informada.')
     }
 
-    if (!opts.cUFAutor) {
+    if (!config.cUFAutor) {
       throw new Error('Codigo UF NFe não informado.')
     }
 
-    if (!opts.cnpj) {
+    if (!config.cnpj) {
       throw new Error('CNPJ não informado.')
     }
 
-    if (!opts.tpAmb) {
+    if (!config.tpAmb) {
       throw new Error('Ambiente não informado.')
     }
 
-    this.opts = Object.freeze({
-      cUFAutor: opts.cUFAutor,
-      cnpj: opts.cnpj,
-      tpAmb: opts.tpAmb,
+    this.config = Object.freeze({
+      cUFAutor: config.cUFAutor,
+      cnpj: config.cnpj,
+      tpAmb: config.tpAmb,
       cert: cert,
       key: key,
       requestOptions: requestOptions,
@@ -82,7 +82,7 @@ class DistribuicaoDFe {
     }
 
     const opts = {
-      ...this.opts,
+      ...this.config,
       pesquisa: {
         grupo: 'distNSU',
         consulta: 'ultNSU',
@@ -108,7 +108,7 @@ class DistribuicaoDFe {
     }
 
     const opts = {
-      ...this.opts,
+      ...this.config,
       pesquisa: {
         grupo: 'consChNFe',
         consulta: 'chNFe',
@@ -137,7 +137,7 @@ class DistribuicaoDFe {
     }
 
     const opts = {
-      ...this.opts,
+      ...this.config,
       pesquisa: {
         grupo: 'consNSU',
         consulta: 'NSU',
