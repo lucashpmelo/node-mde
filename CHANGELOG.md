@@ -2,6 +2,16 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- ISSUE_TEMPLATE
+- CODE_OF_CONDUCT.md
+- CONTRIBUTING.md
+
+### Modificado
+
+- .npmignore
+
 ## [0.10.0] / 2022-08-11
 
 ### Adicionado
