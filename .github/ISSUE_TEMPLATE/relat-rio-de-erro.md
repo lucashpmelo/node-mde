@@ -1,5 +1,5 @@
 ---
-name: Relatório de erro
+name: Relatar um erro
 about: Crie um relatório descrevendo o erro
 title: ''
 labels: ''
