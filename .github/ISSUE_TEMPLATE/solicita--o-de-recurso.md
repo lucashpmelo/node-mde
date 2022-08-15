@@ -1,5 +1,5 @@
 ---
-name: Solicitação de recurso
+name: Solicitar um recurso
 about: Crie uma solicitação de melhoria para a biblioteca
 title: ''
 labels: ''
