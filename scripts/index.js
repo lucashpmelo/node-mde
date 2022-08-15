@@ -108,7 +108,7 @@ async function atualizaVersion() {
   const data = await fs.readFile(path)
   const env = data
     .toString()
-    .replace(/version: '(\d).(\d).(\d)'/g, `version: '${version}'`)
+    .replace(/version: '(\d{1,}).(\d{1,}).(\d{1,})'/g, `version: '${version}'`)
 
   await fs.writeFile(path, env)
 }
