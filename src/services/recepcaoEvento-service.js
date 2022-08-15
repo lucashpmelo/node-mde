@@ -67,8 +67,8 @@ class RecepcaoEvento {
       timezone: config.timezone || 'America/Sao_Paulo',
       cert: cert,
       key: key,
-      requestOptions: requestOptions,
-      httpsOptions: httpsOptions,
+      requestOptions: Object.freeze({ ...requestOptions }),
+      httpsOptions: Object.freeze({ ...httpsOptions }),
     })
 
     Object.freeze(this)

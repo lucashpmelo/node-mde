@@ -60,8 +60,8 @@ class DistribuicaoDFe {
       tpAmb: config.tpAmb,
       cert: cert,
       key: key,
-      requestOptions: requestOptions,
-      httpsOptions: httpsOptions,
+      requestOptions: Object.freeze({ ...requestOptions }),
+      httpsOptions: Object.freeze({ ...httpsOptions }),
     })
 
     Object.freeze(this)

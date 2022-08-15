@@ -8,6 +8,11 @@
 - CODE_OF_CONDUCT.md
 - CONTRIBUTING.md
 
+### Corrigido
+
+- Imutabilidade
+- Types
+
 ### Modificado
 
 - .npmignore
