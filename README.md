@@ -40,8 +40,8 @@ new DistribuicaoDFe(config)
   - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `cUFAutor` `<String>` - [OBRIGATÓRIO] - Código da UF do autor. Consulte a tabela [códigos UF](#códigos-uf).
-  - `cnpj` `<String>` - [OPCIONAL] - CNPJ do interessado no DF-e. Se não imformado um CNPJ, será obrigatório informar um CPF.
-  - `cpf` `<String>` - [OPCIONAL] - CPF do interessado no DF-e. Se não imformado um CPF, será obrigatório informar um CNPJ.
+  - `cnpj` `<String>` - [OPCIONAL] - CNPJ do interessado no DF-e. Se não informado um CNPJ, será obrigatório informar um CPF.
+  - `cpf` `<String>` - [OPCIONAL] - CPF do interessado no DF-e. Se não informado um CPF, será obrigatório informar um CNPJ.
   - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
   - `options` `<Object>` - [OPCIONAL]
     - `requestOptions` `<AxiosRequestConfig>` - [OPCIONAL]
@@ -221,8 +221,8 @@ new RecepcaoEvento(config)
   - `passphrase` `<String>` - [OPCIONAL] - Senha do arquivo **.pfx**.
   - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
-  - `cnpj` `<String>` - [OPCIONAL] - CNPJ do interessado no DF-e. Se não imformado um CNPJ, será obrigatório informar um CPF.
-  - `cpf` `<String>` - [OPCIONAL] - CPF do interessado no DF-e. Se não imformado um CPF, será obrigatório informar um CNPJ.
+  - `cnpj` `<String>` - [OPCIONAL] - CNPJ do interessado no DF-e. Se não informado um CNPJ, será obrigatório informar um CPF.
+  - `cpf` `<String>` - [OPCIONAL] - CPF do interessado no DF-e. Se não informado um CPF, será obrigatório informar um CNPJ.
   - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
   - `timezone` `<String>` - [OPCIONAL] - Fuso horário do autor. É utilizado `'America/Sao_Paulo'` como valor padrão. Consulte a tabela [lista de timezones](#lista-de-timezones) válidos para o Brasil.
   - `options` `<Object>` - [OPCIONAL]
