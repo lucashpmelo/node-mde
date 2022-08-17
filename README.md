@@ -18,7 +18,7 @@ $ npm i node-mde
 ## Funcionalidades
 
 - Consultar por último NSU
-  - Busca a relação dos Documentos Fiscais (`Resumo da NF-e`, `NF-e`, `Resumo do Evento` ou `Evento`)
+  - Retorna a relação dos Documentos Fiscais (`Resumo da NF-e`, `NF-e`, `Resumo do Evento` ou `Evento`)
 - Consultar por chave de acesso
   - Retorna o `XML da NF-e` ou o `Resumo da NF-e`
 - Consultar por NSU
