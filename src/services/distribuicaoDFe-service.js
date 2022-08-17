@@ -11,7 +11,8 @@ class DistribuicaoDFe {
    * @param {string} [config.cert]
    * @param {string} [config.key]
    * @param {string} config.cUFAutor
-   * @param {string} config.cnpj
+   * @param {string} [config.cnpj]
+   * @param {string} [config.cpf]
    * @param {'1' | '2'} config.tpAmb
    * @param {Object} [config.options]
    * @param {import('axios').AxiosRequestConfig} [config.options.requestOptions]
@@ -46,8 +47,8 @@ class DistribuicaoDFe {
       throw new Error('Codigo UF NFe não informado.')
     }
 
-    if (!config.cnpj) {
-      throw new Error('CNPJ não informado.')
+    if (!config.cnpj && !config.cpf) {
+      throw new Error('CNPJ/CPF não informado.')
     }
 
     if (!config.tpAmb) {
@@ -57,6 +58,7 @@ class DistribuicaoDFe {
     this.config = Object.freeze({
       cUFAutor: config.cUFAutor,
       cnpj: config.cnpj,
+      cpf: config.cpf,
       tpAmb: config.tpAmb,
       cert: cert,
       key: key,

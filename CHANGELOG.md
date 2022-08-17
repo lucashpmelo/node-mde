@@ -2,6 +2,14 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- Suporte para CPF nos serviços de `DistribuicaoDFe` e `RecepcaoEvento` #2
+
+### Corrigido
+
+- Types
+
 ## [0.10.1] / 2022-08-15
 
 ### Adicionado

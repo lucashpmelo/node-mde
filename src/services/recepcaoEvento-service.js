@@ -21,7 +21,8 @@ class RecepcaoEvento {
    * @param {string} [config.passphrase]
    * @param {string} [config.cert]
    * @param {string} [config.key]
-   * @param {string} config.cnpj
+   * @param {string} [config.cnpj]
+   * @param {string} [config.cpf]
    * @param {'1' | '2'} config.tpAmb
    * @param {string} [config.timezone = 'America/Sao_Paulo']
    * @param {Object} [config.options]
@@ -53,8 +54,8 @@ class RecepcaoEvento {
       throw new Error('Key não informada.')
     }
 
-    if (!config.cnpj) {
-      throw new Error('CNPJ não informado.')
+    if (!config.cnpj && !config.cpf) {
+      throw new Error('CNPJ/CPF não informado.')
     }
 
     if (!config.tpAmb) {
@@ -63,6 +64,7 @@ class RecepcaoEvento {
 
     this.config = Object.freeze({
       cnpj: config.cnpj,
+      cpf: config.cpf,
       tpAmb: config.tpAmb,
       timezone: config.timezone || 'America/Sao_Paulo',
       cert: cert,
@@ -134,6 +136,7 @@ class RecepcaoEvento {
       retorno['cOrgao'] = '91'
       retorno['tpAmb'] = opts.tpAmb
       retorno['cnpj'] = opts.cnpj
+      retorno['cpf'] = opts.cpf
       retorno['tpEvento'] = tpEvento
       retorno['descEvento'] = descEvento
       retorno['chNFe'] = chNFe

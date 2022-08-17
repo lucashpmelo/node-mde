@@ -1,32 +1,39 @@
 'use strict'
 
 exports.schema = (options) => {
-  options['detEvento'] = {
+  const infEvento = {
+    cOrgao: options.cOrgao,
+    tpAmb: options.tpAmb,
+  }
+
+  if (options.cnpj) {
+    infEvento['CNPJ'] = options.cnpj
+  } else {
+    infEvento['CPF'] = options.cpf
+  }
+
+  infEvento['chNFe'] = options.chNFe
+  infEvento['dhEvento'] = options.dhEvento
+  infEvento['tpEvento'] = options.tpEvento
+  infEvento['nSeqEvento'] = options.nSeqEvento
+  infEvento['verEvento'] = '1.00'
+  infEvento['detEvento'] = {
     descEvento: options.descEvento,
     '@_versao': '1.00',
   }
 
   if (options.xJust) {
-    options.detEvento['xJust'] = options.xJust
+    infEvento.detEvento['xJust'] = options.xJust
   }
+
+  infEvento['@_Id'] = options.infEventoId
 
   return {
     nfeDadosMsg: {
       envEvento: {
         idLote: options.idLote,
         evento: {
-          infEvento: {
-            cOrgao: options.cOrgao,
-            tpAmb: options.tpAmb,
-            CNPJ: options.cnpj,
-            chNFe: options.chNFe,
-            dhEvento: options.dhEvento,
-            tpEvento: options.tpEvento,
-            nSeqEvento: options.nSeqEvento,
-            verEvento: '1.00',
-            detEvento: options.detEvento,
-            '@_Id': options.infEventoId,
-          },
+          infEvento: infEvento,
           '@_versao': '1.00',
         },
         '@_xmlns': 'http://www.portalfiscal.inf.br/nfe',
