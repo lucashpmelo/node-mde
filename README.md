@@ -2,7 +2,7 @@
 
 Biblioteca para consumo dos Web Services da Sefaz de Distribuição de DF-e e Evento de Manifestação do Destinatário.
 
-Essa biblioteca permite verificar as notas fiscais emitidas contra um determinado CNPJ/CPF e realizar o envio do evento de manifestação, podendo assim, baixar o XML da NF-e.
+Essa biblioteca permite consultar a relação das notas fiscais emitidas contra um determinado CNPJ/CPF e realizar o envio do evento de manifestação, podendo assim, baixar o XML da NF-e.
 
 ## Instalação
 
