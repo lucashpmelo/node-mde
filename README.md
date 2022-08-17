@@ -2,6 +2,8 @@
 
 Biblioteca para consumo dos Web Services da Sefaz de Distribuição de DF-e e Evento de Manifestação do Destinatário.
 
+Essa biblioteca permite verificar as notas fiscais emitidas contra um determinado CNPJ/CPF e realizar o envio do evento de manifestação, podendo assim, baixar o XML da NF-e.
+
 ## Instalação
 
 ```sh
@@ -12,6 +14,17 @@ $ npm i node-mde
 
 - Possuir um **Certificado A1** válido emitido por uma Autoridade Certificadora credenciada pela Infraestrutura de Chaves Públicas Brasileira – **ICP-Brasil**.
 - O certificado pode ser usando no formato **PFX** e **Senha** _OU_ **cert.pem** e **key.pem**
+
+## Funcionalidades
+
+- Consultar por último NSU
+  - Busca a relação dos Documentos Fiscais (`Resumo da NF-e`, `NF-e`, `Resumo do Evento` ou `Evento`)
+- Consultar por chave de acesso
+  - Retorna o `XML da NF-e` ou o `Resumo da NF-e`
+- Consultar por NSU
+  - Retorna o Documento Fiscal referente ao NSU informado, podendo ser um `Resumo`, uma `NF-e` ou um `Evento`
+- Envio de evento
+  - Registra o evento de manifestação na nota informada (`Confirmação da Operação`, `Ciência da Operação`, `Desconhecimento da Operação` ou `Operação não Realizada`)
 
 ## Distribuição de DF-e
 
@@ -27,7 +40,8 @@ new DistribuicaoDFe(config)
   - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `cUFAutor` `<String>` - [OBRIGATÓRIO] - Código da UF do autor. Consulte a tabela [códigos UF](#códigos-uf).
-  - `cnpj` `<String>` - [OBRIGATÓRIO] - CNPJ do autor.
+  - `cnpj` `<String>` - [OPCIONAL] - CNPJ do interessado no DF-e. Se não imformado um CNPJ, será obrigatório informar um CPF.
+  - `cpf` `<String>` - [OPCIONAL] - CPF do interessado no DF-e. Se não imformado um CPF, será obrigatório informar um CNPJ.
   - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
   - `options` `<Object>` - [OPCIONAL]
     - `requestOptions` `<AxiosRequestConfig>` - [OPCIONAL]
@@ -207,7 +221,8 @@ new RecepcaoEvento(config)
   - `passphrase` `<String>` - [OPCIONAL] - Senha do arquivo **.pfx**.
   - `cert` `<String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
   - `key` `<String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
-  - `cnpj` `<String>` - [OBRIGATÓRIO] - CNPJ do autor.
+  - `cnpj` `<String>` - [OPCIONAL] - CNPJ do interessado no DF-e. Se não imformado um CNPJ, será obrigatório informar um CPF.
+  - `cpf` `<String>` - [OPCIONAL] - CPF do interessado no DF-e. Se não imformado um CPF, será obrigatório informar um CNPJ.
   - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
   - `timezone` `<String>` - [OPCIONAL] - Fuso horário do autor. É utilizado `'America/Sao_Paulo'` como valor padrão. Consulte a tabela [lista de timezones](#lista-de-timezones) válidos para o Brasil.
   - `options` `<Object>` - [OPCIONAL]
