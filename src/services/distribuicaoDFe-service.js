@@ -62,8 +62,8 @@ class DistribuicaoDFe {
       tpAmb: config.tpAmb,
       cert: cert.toString(),
       key: key.toString(),
-      requestOptions: Object.freeze({ ...requestOptions }),
-      httpsOptions: Object.freeze({ ...httpsOptions }),
+      requestOptions: Object.freeze(requestOptions),
+      httpsOptions: Object.freeze(httpsOptions),
     })
 
     Object.freeze(this)
