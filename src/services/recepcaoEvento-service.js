@@ -19,8 +19,8 @@ class RecepcaoEvento {
    * @param {Object} config
    * @param {Buffer} [config.pfx]
    * @param {string} [config.passphrase]
-   * @param {string} [config.cert]
-   * @param {string} [config.key]
+   * @param {Buffer | string} [config.cert]
+   * @param {Buffer | string} [config.key]
    * @param {string} [config.cnpj]
    * @param {string} [config.cpf]
    * @param {'1' | '2'} config.tpAmb
@@ -67,8 +67,8 @@ class RecepcaoEvento {
       cpf: config.cpf,
       tpAmb: config.tpAmb,
       timezone: config.timezone || 'America/Sao_Paulo',
-      cert: cert,
-      key: key,
+      cert: cert.toString(),
+      key: key.toString(),
       requestOptions: Object.freeze({ ...requestOptions }),
       httpsOptions: Object.freeze({ ...httpsOptions }),
     })

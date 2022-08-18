@@ -5,6 +5,7 @@
 ### Adicionado
 
 - Suporte para CPF nos serviços de `DistribuicaoDFe` e `RecepcaoEvento` #2
+- Suporte para o tipo Buffer nas propriedades `cert` e `key` #3
 
 ### Corrigido
 

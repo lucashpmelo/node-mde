@@ -8,8 +8,8 @@ class DistribuicaoDFe {
    * @param {Object} config
    * @param {Buffer} [config.pfx]
    * @param {string} [config.passphrase]
-   * @param {string} [config.cert]
-   * @param {string} [config.key]
+   * @param {Buffer | string} [config.cert]
+   * @param {Buffer | string} [config.key]
    * @param {string} config.cUFAutor
    * @param {string} [config.cnpj]
    * @param {string} [config.cpf]
@@ -60,8 +60,8 @@ class DistribuicaoDFe {
       cnpj: config.cnpj,
       cpf: config.cpf,
       tpAmb: config.tpAmb,
-      cert: cert,
-      key: key,
+      cert: cert.toString(),
+      key: key.toString(),
       requestOptions: Object.freeze({ ...requestOptions }),
       httpsOptions: Object.freeze({ ...httpsOptions }),
     })
