@@ -1,0 +1,24 @@
+name: Solicitar um recurso
+description: Crie uma solicitação de melhoria para a biblioteca
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição
+      description: Uma descrição da melhoria, detalhando o que você espera que a biblioteca faça.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Exemplo de código
+      description: Caso sua melhoria envolva alguma alteração na API, forneça um exemplo de código do que você quer alcançar.
+      placeholder: |
+        ```js
+        // Seu exemplo aqui...
+        distribuicao.novaFuncao()
+        ```
+    validations:
+      required: false

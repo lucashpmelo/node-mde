@@ -1,0 +1,24 @@
+name: Relatar um erro
+description: Crie um relatório descrevendo o erro
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição
+      description: Uma descrição do que você está tentando fazer, e qual erro está acontecendo.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Exemplo de reprodução
+      description: Forneça o trecho do código que acontece o erro
+      placeholder: |
+        ```js
+        // Seu código aqui...
+        const consulta = await distribuicao.consultaUltNSU('000000000000000')
+        ```
+    validations:
+      required: true
