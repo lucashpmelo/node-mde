@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.11.0] / 2022-08-20
+
 ### Adicionado
 
 - Suporte para CPF nos serviços de `DistribuicaoDFe` e `RecepcaoEvento` #2
@@ -215,7 +217,8 @@
   - 210220 - Desconhecimento da Operação
   - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.10.1..HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.11.0..HEAD
+[0.11.0]: https://github.com/lucashpmelo/node-mde/compare/0.10.1...0.11.0
 [0.10.1]: https://github.com/lucashpmelo/node-mde/compare/0.10.0...0.10.1
 [0.10.0]: https://github.com/lucashpmelo/node-mde/compare/0.9.2...0.10.0
 [0.9.2]: https://github.com/lucashpmelo/node-mde/compare/0.9.1...0.9.2
