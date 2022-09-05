@@ -1,5 +1,5 @@
 name: Dúvida
-description: Crie uma solicitação para tirar dúvidas sobre a biblioteca
+description: Abra uma solicitação para tirar dúvidas sobre a biblioteca
 
 body:
   - type: textarea

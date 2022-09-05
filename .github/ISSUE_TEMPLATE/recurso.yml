@@ -1,5 +1,5 @@
 name: Solicitar um recurso
-description: Crie uma solicitação de melhoria para a biblioteca
+description: Faça uma proposta de melhoria para a biblioteca
 
 body:
   - type: textarea
