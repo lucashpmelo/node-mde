@@ -39,8 +39,6 @@ async function limparDiretorio(path) {
   await Promise.all(
     arquivos.map(async (a) => {
       if (existsSync(a)) await fs.rm(a)
-
-      return
     })
   )
 
@@ -49,12 +47,8 @@ async function limparDiretorio(path) {
       if (d === path) return
 
       if (existsSync(d)) await fs.rmdir(d)
-
-      return
     })
   )
-
-  return
 }
 
 async function popularDiretorio(path, srcPath) {
@@ -76,8 +70,6 @@ async function popularDiretorio(path, srcPath) {
   await Promise.all(
     dirNew.map(async (d) => {
       if (!existsSync(d)) await fs.mkdir(d)
-
-      return
     })
   )
 
@@ -93,12 +85,8 @@ async function popularDiretorio(path, srcPath) {
 
         await fs.writeFile(a, code)
       }
-
-      return
     })
   )
-
-  return
 }
 
 async function atualizaVersion() {
@@ -108,7 +96,7 @@ async function atualizaVersion() {
   const data = await fs.readFile(path)
   const env = data
     .toString()
-    .replace(/version: '(\d{1,}).(\d{1,}).(\d{1,})'/g, `version: '${version}'`)
+    .replace(/version: '(\d+).(\d+).(\d+)'/g, `version: '${version}'`)
 
   await fs.writeFile(path, env)
 }
@@ -123,8 +111,6 @@ async function run() {
   await Promise.all([limparDiretorio(path), limparDiretorio(distPath)])
 
   await popularDiretorio(path, srcPath)
-
-  return
 }
 
 run().catch((err) => console.log(err))
