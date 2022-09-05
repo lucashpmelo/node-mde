@@ -16,7 +16,7 @@ exports.enveloparXml = (xml) => {
 
 exports.unzip = async (data) => {
   const buf = new Buffer.from(data, 'base64')
-  return await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     zlib.unzip(buf, function (err, buffer) {
       if (err) reject(err)
       const content = buffer.toString('utf8')
