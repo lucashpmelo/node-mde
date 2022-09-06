@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Método `consultaNSU` #4
+
 ## [0.11.0] / 2022-08-20
 
 ### Adicionado

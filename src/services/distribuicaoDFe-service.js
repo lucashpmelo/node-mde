@@ -125,15 +125,12 @@ class DistribuicaoDFe {
    * @param {string} nsu
    */
   consultaNSU(nsu) {
-    if (nsu === 0) {
-      nsu = '000000000000000'
-    }
-
     if (!nsu) {
       throw new Error('NSU não informado.')
     }
 
     nsu = String(nsu)
+
     if (nsu.length > 15) {
       throw new Error('NSU com tamanho incorreto.')
     }
