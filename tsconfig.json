@@ -2,6 +2,7 @@
   "include": ["./src/index.js"],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
+    // "checkJs": true,
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
