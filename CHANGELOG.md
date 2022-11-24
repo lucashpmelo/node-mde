@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.12.0] / 2022-11-24
+
 ### Corrigido
 
 - Método `consultaNSU` #4
@@ -225,7 +227,8 @@
   - 210220 - Desconhecimento da Operação
   - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.11.0..HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.12.0..HEAD
+[0.12.0]: https://github.com/lucashpmelo/node-mde/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/lucashpmelo/node-mde/compare/0.10.1...0.11.0
 [0.10.1]: https://github.com/lucashpmelo/node-mde/compare/0.10.0...0.10.1
 [0.10.0]: https://github.com/lucashpmelo/node-mde/compare/0.9.2...0.10.0
