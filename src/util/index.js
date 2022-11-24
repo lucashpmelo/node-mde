@@ -15,7 +15,7 @@ exports.enveloparXml = (xml) => {
 }
 
 exports.unzip = async (data) => {
-  const buf = new Buffer.from(data, 'base64')
+  const buf = Buffer.from(data, 'base64')
   return new Promise((resolve, reject) => {
     zlib.unzip(buf, function (err, buffer) {
       if (err) reject(err)

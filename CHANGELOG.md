@@ -6,6 +6,10 @@
 
 - Método `consultaNSU` #4
 
+### Segurança
+
+- Atualizado as dependências npm
+
 ## [0.11.0] / 2022-08-20
 
 ### Adicionado
