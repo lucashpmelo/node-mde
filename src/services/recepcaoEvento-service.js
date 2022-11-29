@@ -1,6 +1,6 @@
 'use strict'
 
-const moment = require('moment-timezone')
+const { DateTime } = require('luxon')
 
 const controllerRecepcaoEvento = require('../controllers/recepcaoEvento-controller')
 const { convertPFX } = require('../util')
@@ -24,7 +24,7 @@ class RecepcaoEvento {
    * @param {string} [config.cnpj]
    * @param {string} [config.cpf]
    * @param {'1' | '2'} config.tpAmb
-   * @param {string} [config.timezone = 'America/Sao_Paulo']
+   * @param {'America/Araguaina' | 'America/Bahia' | 'America/Belem' | 'America/Boa_Vista' | 'America/Campo_Grande' | 'America/Cuiaba' | 'America/Fortaleza' | 'America/Maceio' | 'America/Manaus' | 'America/Noronha' | 'America/Porto_Velho' | 'America/Recife' | 'America/Rio_Branco' | 'America/Sao_Paulo'} [config.timezone = 'America/Sao_Paulo']
    * @param {Object} [config.options]
    * @param {import('axios').AxiosRequestConfig} [config.options.requestOptions]
    * @param {import('https').AgentOptions} [config.options.httpsOptions]
@@ -141,9 +141,9 @@ class RecepcaoEvento {
       retorno['descEvento'] = descEvento
       retorno['chNFe'] = chNFe
       retorno['infEventoId'] = `ID${tpEvento}${chNFe}01`
-      retorno['dhEvento'] = moment()
-        .tz(opts.timezone)
-        .format('YYYY-MM-DD[T]HH:mm:ssZ')
+      retorno['dhEvento'] = DateTime.now()
+        .setZone(opts.timezone)
+        .toFormat("yyyy-MM-dd'T'HH:mm:ssZZ")
 
       return retorno
     })

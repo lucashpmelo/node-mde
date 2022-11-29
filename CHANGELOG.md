@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Modificado
+
+- Biblioteca para lidar com datas e horas #7
+
 ## [0.12.0] / 2022-11-24
 
 ### Corrigido
