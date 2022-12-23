@@ -1,5 +1,11 @@
 # Node MD-e
 
+[![npm version](https://img.shields.io/npm/v/node-mde.svg)](https://www.npmjs.com/package/node-mde)
+[![npm downloads](https://img.shields.io/npm/dt/node-mde.svg)](https://npm-stat.com/charts.html?package=node-mde)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lucashpmelo/node-mde/blob/main/LICENSE)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lucashpmelo_node-mde&metric=alert_status)](https://sonarcloud.io/dashboard?id=lucashpmelo_node-mde)
+[![Known Vulnerabilities](https://snyk.io/test/npm/node-mde/badge.svg)](https://snyk.io/test/npm/node-mde)
+
 Biblioteca para consumo dos Web Services da Sefaz de Distribuição de DF-e e Evento de Manifestação do Destinatário.
 
 Essa biblioteca permite consultar a relação das notas fiscais emitidas contra um determinado CNPJ/CPF e realizar o envio do evento de manifestação, podendo assim, baixar o XML da NF-e.
