@@ -3,17 +3,16 @@
 const axios = require('axios').default
 const https = require('https')
 
-const ENV = require('../env')
+const { VERSION } = require('../env')
 
 class Instance {
   constructor(opts) {
-    const baseURL = ENV[opts.service][opts.tpAmb]
-    const ca = ENV['ca']
+    const { baseURL, ca, cert, key } = opts
 
     const AgentOptions = Object.assign(
       {
-        cert: opts.cert,
-        key: opts.key,
+        cert: cert,
+        key: key,
         ca: ca,
       },
       { ...opts.httpsOptions }
@@ -25,7 +24,7 @@ class Instance {
       {
         baseURL: baseURL,
         headers: {
-          'User-Agent': `node-mde/${ENV.version}`,
+          'User-Agent': `node-mde/${VERSION}`,
           'Content-Type': 'application/soap+xml; charset=utf-8',
         },
         httpsAgent: httpsAgent,
@@ -44,9 +43,9 @@ class Instance {
   /**
    * @returns {Promise<{status: number, data: string}>}
    */
-  async request(options) {
+  async request(config) {
     try {
-      const response = await this.instance(options)
+      const response = await this.instance(config)
 
       const { status, data } = response
 

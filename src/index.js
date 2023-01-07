@@ -1,7 +1,7 @@
 'use strict'
 
-const DistribuicaoDFe = require('./services/distribuicaoDFe-service')
-const RecepcaoEvento = require('./services/recepcaoEvento-service')
+const DistribuicaoDFe = require('./apis/distribuicaoDFe-api')
+const RecepcaoEvento = require('./apis/recepcaoEvento-api')
 
 module.exports = {
   DistribuicaoDFe: DistribuicaoDFe,

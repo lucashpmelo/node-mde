@@ -1,7 +1,9 @@
 .github
 .vscode
+certs
 src
 scripts
+test
 package-lock.json
 tsconfig.json
 prettier.config.js

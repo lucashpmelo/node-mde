@@ -2,6 +2,14 @@
 
 ## [Não publicado]
 
+### Adicionado
+
+- Testes Unitários #8
+
+### Modificado
+
+- Estruturação do código para ser possível testar cada módulo separadamente
+
 ## [0.13.0] / 2022-11-29
 
 ### Modificado

@@ -91,14 +91,11 @@ async function popularDiretorio(path, srcPath) {
 
 async function atualizaVersion() {
   const dir = `.${sep}src${sep}env`
-  const path = dir + sep + 'index.js'
+  const path = dir + sep + 'version.js'
 
-  const data = await fs.readFile(path)
-  const env = data
-    .toString()
-    .replace(/version: '(\d+).(\d+).(\d+)'/g, `version: '${version}'`)
+  const data = `module.exports = { VERSION: '${version}' }`
 
-  await fs.writeFile(path, env)
+  await fs.writeFile(path, data)
 }
 
 async function run() {
