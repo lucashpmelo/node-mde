@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.14.0] / 2023-01-14
+
 ### Adicionado
 
 - Testes Unitários #8
@@ -9,6 +11,10 @@
 ### Modificado
 
 - Estruturação do código para ser possível testar cada módulo separadamente
+
+### Segurança
+
+- Atualizado as dependências npm
 
 ## [0.13.0] / 2022-11-29
 
@@ -241,7 +247,8 @@
   - 210220 - Desconhecimento da Operação
   - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.13.0..HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.0..HEAD
+[0.14.0]: https://github.com/lucashpmelo/node-mde/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/lucashpmelo/node-mde/compare/0.12.0...0.13.0
 [0.12.0]: https://github.com/lucashpmelo/node-mde/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/lucashpmelo/node-mde/compare/0.10.1...0.11.0
