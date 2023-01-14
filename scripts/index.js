@@ -93,7 +93,7 @@ async function atualizaVersion() {
   const dir = `.${sep}src${sep}env`
   const path = dir + sep + 'version.js'
 
-  const data = `module.exports = { VERSION: '${version}' }`
+  const data = `module.exports = { VERSION: '${version}' }\r\n`
 
   await fs.writeFile(path, data)
 }
