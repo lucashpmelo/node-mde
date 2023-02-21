@@ -1,6 +1,6 @@
 {
   "name": "node-mde",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "Biblioteca para consultar notas destinadas e enviar evento de manifestação do destinatário",
   "main": "./lib/index.js",
   "types": "./dist/index.d.ts",
