@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.14.2] / 2023-04-17
+
 ### Segurança
 
 - Atualizado as dependências npm
@@ -257,7 +259,8 @@
   - 210220 - Desconhecimento da Operação
   - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.1..HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.2..HEAD
+[0.14.2]: https://github.com/lucashpmelo/node-mde/compare/0.14.1...0.14.2
 [0.14.1]: https://github.com/lucashpmelo/node-mde/compare/0.14.0...0.14.1
 [0.14.0]: https://github.com/lucashpmelo/node-mde/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/lucashpmelo/node-mde/compare/0.12.0...0.13.0
