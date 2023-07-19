@@ -6,6 +6,10 @@
 
 - Atualizado README.md
 
+### Segurança
+
+- Atualizado as dependências npm
+
 ## [0.14.3] / 2023-06-08
 
 ### Segurança
