@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Modificado
+
+- Atualizado README.md
+
 ## [0.14.3] / 2023-06-08
 
 ### Segurança

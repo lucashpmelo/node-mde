@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/node-mde.svg)](https://www.npmjs.com/package/node-mde)
 [![npm downloads](https://img.shields.io/npm/dt/node-mde.svg)](https://npm-stat.com/charts.html?package=node-mde)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lucashpmelo/node-mde/blob/main/LICENSE)
+[![Package Quality](https://packagequality.com/shield/node-mde.svg)](https://packagequality.com/#?package=node-mde)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lucashpmelo_node-mde&metric=alert_status)](https://sonarcloud.io/dashboard?id=lucashpmelo_node-mde)
 [![Known Vulnerabilities](https://snyk.io/test/npm/node-mde/badge.svg)](https://snyk.io/test/npm/node-mde)
 
@@ -243,7 +244,7 @@ new RecepcaoEvento(config)
 | `lote`               | _array_  |  1-20   | Lista de eventos para manifestação.                                                                                                                      |
 | `lote.chNFe`         | _string_ |   44    | Chave de Acesso da NF-e vinculada ao Evento.                                                                                                             |
 | `lote.tpEvento`      | _number_ |    6    | Código do evento: 210200 - Confirmacao da Operacao; 210210 - Ciencia da Operacao; 210220 - Desconhecimento da Operacao; 210240 - Operacao nao Realizada. |
-| `lote.justificativa` | _string_ | 15-255  | Informar a justificativa porque a operação não foi realizada, este campo deve ser informado somente no evento de Operação não Realizada.                 |
+| `lote.justificativa` | _string_ | 15-255  | Informar a justificativa do porque a operação não foi realizada, este campo deve ser informado somente no evento de Operação não Realizada.              |
 
 #### Exemplo
 
