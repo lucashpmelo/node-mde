@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.14.4] / 2023-07-19
+
 ### Modificado
 
 - Atualizado README.md
@@ -273,7 +275,8 @@
   - 210220 - Desconhecimento da Operação
   - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.3..HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.4..HEAD
+[0.14.4]: https://github.com/lucashpmelo/node-mde/compare/0.14.3...0.14.4
 [0.14.3]: https://github.com/lucashpmelo/node-mde/compare/0.14.2...0.14.3
 [0.14.2]: https://github.com/lucashpmelo/node-mde/compare/0.14.1...0.14.2
 [0.14.1]: https://github.com/lucashpmelo/node-mde/compare/0.14.0...0.14.1
