@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+## [0.14.5] / 2023-07-28
+
 ### Corrigido
 
 - Arquivo `.pfx` com lista de certificados invertida
@@ -279,7 +281,8 @@
   - 210220 - Desconhecimento da Operação
   - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.4..HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.5..HEAD
+[0.14.5]: https://github.com/lucashpmelo/node-mde/compare/0.14.4...0.14.5
 [0.14.4]: https://github.com/lucashpmelo/node-mde/compare/0.14.3...0.14.4
 [0.14.3]: https://github.com/lucashpmelo/node-mde/compare/0.14.2...0.14.3
 [0.14.2]: https://github.com/lucashpmelo/node-mde/compare/0.14.1...0.14.2
