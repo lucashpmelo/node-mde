@@ -21,9 +21,13 @@ class Certificado {
         p12.getBags({ bagType: forge.pki.oids.keyBag })[forge.pki.oids.keyBag]
       )
 
-    const certBags = p12.getBags({ bagType: forge.pki.oids.certBag })[
-      forge.pki.oids.certBag
-    ]
+    const certBags = p12
+      .getBags({ bagType: forge.pki.oids.certBag })
+      [forge.pki.oids.certBag].sort(
+        (a, b) =>
+          new Date(a.cert.validity.notAfter) -
+          new Date(b.cert.validity.notAfter)
+      )
 
     const rsaPrivateKey = forge.pki.privateKeyToAsn1(keyData[0].key)
     const privateKeyInfo = forge.pki.wrapRsaPrivateKey(rsaPrivateKey)

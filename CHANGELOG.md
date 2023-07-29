@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Corrigido
+
+- Arquivo `.pfx` com lista de certificados invertida
+
 ## [0.14.4] / 2023-07-19
 
 ### Modificado
