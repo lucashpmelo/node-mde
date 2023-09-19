@@ -2,6 +2,10 @@
 
 ## [Não publicado]
 
+### Segurança
+
+- Atualizado as dependências npm
+
 ## [0.14.5] / 2023-07-28
 
 ### Corrigido
