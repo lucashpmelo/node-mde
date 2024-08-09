@@ -286,33 +286,32 @@ if (consulta.error) {
 
 console.log(consulta)
 // {
-//   data: {
-//     tpAmb: '2',
-//     verAplic: '1.5.11',
-//     cStat: '138',
-//     xMotivo: 'Documento(s) localizado(s)',
-//     dhResp: '2022-06-21T10:48:14-03:00',
-//     ultNSU: '000000000000050',
-//     maxNSU: '000000000000212',
-//     docZip: [
-???
+//   "data": {
+//     "tpAmb": "1",
+//     "verAplic": "2.0.5_2408061805",
+//     "cStat": "138",
+//     "xMotivo": "documento localizado.",
+//     "dhResp": "2024-08-06T18:05:09",
+//     "ultNSU": "000000000002211",
+//     "maxNSU": "000000000002244",
+//     "docZip": [
 //       {
-//         xml: '<resNFe xmlns:xsd="http://www.w3.org/2001/XMLSchema" ... </resNFe>',
-//         json: { resNFe: { ... } },
-//         nsu: '000000000000049',
-//         schema: 'resNFe_v1.01.xsd',
+//         "xml": "<cteProc versao=\"4.00\" ... </cteProc>",
+//         "json": { "cteProc": { ... }},
+//         "nsu": "000000000000001",
+//         "schema": "procCTe_v4.00.xsd"
 //       },
 //       {
-//         xml: '<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe"> ... </nfeProc>',
-//         json: { nfeProc: { ... } },
-//         nsu: '000000000000050',
-//         schema: 'procNFe_v4.00.xsd',
-//       },
-//     ],
+//         "xml": "<procEventoCTe versao=\"4.00\" ... </procEventoCTe>",
+//         "json": { "procEventoCTe": { ... }},
+//         "nsu": "00000000000002",
+//         "schema": "procEventoCTe_v4.00.xsd"
+//       }
+//     ]
 //   },
-//   reqXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap12:Body></soap12:Envelope>',
-//   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
-//   status: 200,
+//   "status": 200,
+//   "reqXml": "<soap:Envelope ... </soap:Envelope>",
+//   "resXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope ... </soap:Envelope>"
 // }
 ```
 
@@ -320,7 +319,7 @@ console.log(consulta)
 
 | Campo   |   Tipo   | Tamanho | Descrição                   |
 | :------ | :------: | :-----: | :-------------------------- |
-| `chNFe` | _string_ |   44    | Chave de acesso específica. |
+| `chCTe` | _string_ |   44    | Chave de acesso específica. |
 
 #### Exemplo
 
@@ -346,26 +345,26 @@ if (consulta.error) {
 
 console.log(consulta)
 // {
-//   data: {
-//     tpAmb: '2',
-//     verAplic: '1.5.11',
-//     cStat: '138',
-//     xMotivo: 'Documento localizado',
-//     dhResp: '2022-06-21T10:49:21-03:00',
-//     ultNSU: '',
-//     maxNSU: '',
-//     docZip: [
+//   "data": {
+//     "tpAmb": "1",
+//     "verAplic": "2.0.5_2408061805",
+//     "cStat": "138",
+//     "xMotivo": "documento localizado.",
+//     "dhResp": "2024-08-06T18:05:09",
+//     "ultNSU": "000000000002211",
+//     "maxNSU": "000000000002244",
+//     "docZip": [
 //       {
-//         xml: '<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe"> ... </nfeProc>',
-//         json: { nfeProc: { ... } },
-//         nsu: '000000000000050',
-//         schema: 'procNFe_v4.00.xsd',
-//       },
-//     ],
+//         "xml": "<cteProc versao=\"4.00\" ... </cteProc>",
+//         "json": { "cteProc": { ... }},
+//         "nsu": "000000000000001",
+//         "schema": "procCTe_v4.00.xsd"
+//       }
+//     ]
 //   },
-//   reqXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap12:Body></soap12:Envelope>',
-//   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
-//   status: 200,
+//   "status": 200,
+//   "reqXml": "<soap:Envelope ... </soap:Envelope>",
+//   "resXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope ... </soap:Envelope>"
 // }
 ```
 
@@ -389,7 +388,7 @@ const distribuicao = new DistribuicaoCTe({
   tpAmb: '2',
 })
 
-const consulta = await distribuicao.consultaNSU('000000000000049')
+const consulta = await distribuicao.consultaNSU('000000000000001')
 
 if (consulta.error) {
   throw new Error(consulta.error)
@@ -397,30 +396,30 @@ if (consulta.error) {
 
 console.log(consulta)
 // {
-//   data: {
-//     tpAmb: '2',
-//     verAplic: '1.5.11',
-//     cStat: '138',
-//     xMotivo: 'Documento localizado',
-//     dhResp: '2022-06-21T10:50:46-03:00',
-//     ultNSU: '000000000000049',
-//     maxNSU: '000000000000212',
-//     docZip: [
+//   "data": {
+//     "tpAmb": "1",
+//     "verAplic": "2.0.5_2408061805",
+//     "cStat": "138",
+//     "xMotivo": "documento localizado.",
+//     "dhResp": "2024-08-06T18:05:09",
+//     "ultNSU": "000000000002211",
+//     "maxNSU": "000000000002244",
+//     "docZip": [
 //       {
-//         xml: '<resNFe xmlns:xsd="http://www.w3.org/2001/XMLSchema" ... </resNFe>',
-//         json: { resNFe: { ... } },
-//         nsu: '000000000000049',
-//         schema: 'resNFe_v1.01.xsd',
-//       },
-//     ],
+//         "xml": "<cteProc versao=\"4.00\" ... </cteProc>",
+//         "json": { "cteProc": { ... }},
+//         "nsu": "000000000000001",
+//         "schema": "procCTe_v4.00.xsd"
+//       }
+//     ]
 //   },
-//   reqXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap12:Body></soap12:Envelope>',
-//   resXml: '<?xml version="1.0" encoding="utf-8"?> ... </soap:Body></soap:Envelope>',
-//   status: 200,
+//   "status": 200,
+//   "reqXml": "<soap:Envelope ... </soap:Envelope>",
+//   "resXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope ... </soap:Envelope>"
 // }
 ```
 
-## Manifestação do Destinatário
+## Manifestação do Destinatário (NF-e)
 
 ### Construtor
 
