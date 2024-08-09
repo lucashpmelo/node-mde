@@ -1,6 +1,6 @@
 'use strict'
 
-const { DistribuicaoController } = require('../controllers')
+const { DistribuicaoNFeController } = require('../controllers')
 const {
   AmbienteValidator,
   CertificadoValidator,
@@ -10,7 +10,7 @@ const {
   UfValidator,
 } = require('../validators')
 
-class DistribuicaoDFe {
+class DistribuicaoNFe {
   /**
    * @param {Object} config
    * @param {Buffer} [config.pfx]
@@ -85,7 +85,7 @@ class DistribuicaoDFe {
       chNFe: value,
     }
 
-    return DistribuicaoController.enviar(opts)
+    return DistribuicaoNFeController.enviar(opts)
   }
 
   /**
@@ -105,7 +105,7 @@ class DistribuicaoDFe {
       nsu: value,
     }
 
-    return DistribuicaoController.enviar(opts)
+    return DistribuicaoNFeController.enviar(opts)
   }
 
   /**
@@ -125,8 +125,8 @@ class DistribuicaoDFe {
       ultNSU: value,
     }
 
-    return DistribuicaoController.enviar(opts)
+    return DistribuicaoNFeController.enviar(opts)
   }
 }
 
-module.exports = DistribuicaoDFe
+module.exports = DistribuicaoNFe

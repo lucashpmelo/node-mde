@@ -101,7 +101,11 @@ async function atualizaVersion() {
 async function run() {
   const path = `.${sep}lib`
   const srcPath = `.${sep}src`
-  const distPath = `.${sep}dist`
+  let distPath = `.${sep}dist`
+  if (process.argv.length === 3) {
+    distPath = process.argv[2]
+    console.info(`Path to dist: ${distPath}`)
+  }
 
   await atualizaVersion()
 

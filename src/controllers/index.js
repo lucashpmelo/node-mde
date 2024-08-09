@@ -1,10 +1,12 @@
 'use strict'
 
-const DistribuicaoController = require('./distribuicaoDFe-controller')
+const DistribuicaoNFeController = require('./distribuicaoNFe-controller')
+const DistribuicaoCTeController = require('./distribuicaoCTe-controller')
 const RecepcaoController = require('./recepcaoEvento-controller')
 
 const controller = Object.freeze({
-  DistribuicaoController,
+  DistribuicaoNFeController,
+  DistribuicaoCTeController,
   RecepcaoController,
 })
 

@@ -11,6 +11,28 @@ Biblioteca para consumo dos Web Services da Sefaz de Distribuição de DF-e e Ev
 
 Essa biblioteca permite consultar a relação das notas fiscais emitidas contra um determinado CNPJ/CPF e realizar o envio do evento de manifestação, podendo assim, baixar o XML da NF-e.
 
+## Índice
+
+1. [Instação](#Instação)
+2. [Pré-Requisitos](#Pré-Requisitos)
+3. [Funcionalidades](#Funcionalidades)
+4. [Distribuição de NF-e](#distribuição-de-nf-e)
+   1. [Construtor](#Construtor)
+   2. [Consulta por ultNSU](#consulta-por-nsu)
+   3. [Consulta por chNFe](#consulta-por-chnfe)
+   4. [Consulta por NSU](#consulta-por-nsu)
+5. [Distribuição de CT-e](#distribuição-de-ct-e)
+   1. [Construtor](#construtor-1)
+   2. [Consulta por ultNSU](#consulta-por-ultnsu-1)
+   3. [Consulta por chCTe](#consulta-por-chcte)
+   4. [Consulta por NSU](#consulta-por-nsu-1)
+6. [Manifestação do Destinatário](#manifestação-do-destinatário)
+   1. [Construtor](#construtor-2)
+   2. [Enviar Lote de Eventos](#enviar-lote-de-eventos)
+7. [Tabelas](#tabelas)
+   1. [Códigos UF](#códigos-uf)
+   2. [Lista de Timezones](#lista-de-timezones)
+
 ## Instalação
 
 ```sh
@@ -33,12 +55,12 @@ $ npm i node-mde
 - Envio de evento
   - Registra o evento de manifestação na nota informada (`Confirmação da Operação`, `Ciência da Operação`, `Desconhecimento da Operação` ou `Operação não Realizada`)
 
-## Distribuição de DF-e
+## Distribuição de NF-e
 
 ### Construtor
 
 ```js
-new DistribuicaoDFe(config)
+new DistribuicaoNFe(config)
 ```
 
 - `config` `<Object>`
@@ -63,10 +85,10 @@ new DistribuicaoDFe(config)
 #### Exemplo
 
 ```js
-const { DistribuicaoDFe } = require('node-mde')
+const { DistribuicaoNFe } = require('node-mde')
 const fs = require('fs')
 
-const distribuicao = new DistribuicaoDFe({
+const distribuicao = new DistribuicaoNFe({
   pfx: fs.readFileSync('./certificado.pfx'),
   passphrase: 'senha',
   cnpj: '12345678901234',
@@ -120,10 +142,10 @@ console.log(consulta)
 #### Exemplo
 
 ```js
-const { DistribuicaoDFe } = require('node-mde')
+const { DistribuicaoNFe } = require('node-mde')
 const fs = require('fs')
 
-const distribuicao = new DistribuicaoDFe({
+const distribuicao = new DistribuicaoNFe({
   pfx: fs.readFileSync('./certificado.pfx'),
   passphrase: 'senha',
   cnpj: '12345678901234',
@@ -173,10 +195,10 @@ console.log(consulta)
 #### Exemplo
 
 ```js
-const { DistribuicaoDFe } = require('node-mde')
+const { DistribuicaoNFe } = require('node-mde')
 const fs = require('fs')
 
-const distribuicao = new DistribuicaoDFe({
+const distribuicao = new DistribuicaoNFe({
   pfx: fs.readFileSync('./certificado.pfx'),
   passphrase: 'senha',
   cnpj: '12345678901234',
@@ -215,7 +237,189 @@ console.log(consulta)
 // }
 ```
 
-## Manifestação do Destinatário
+## Distribuição de CT-e
+
+### Construtor
+
+```js
+new DistribuicaoCTe(config)
+```
+
+- `config` `<Object>`
+  - `pfx` `<Buffer>` - [OPCIONAL] - Arquivo **.pfx**. Se o `pfx` não for informado, as propriedades `cert` e `key` passam a ser obrigatórias.
+  - `passphrase` `<String>` - [OPCIONAL] - Senha do arquivo **.pfx**.
+  - `cert` `<Buffer | String>` - [OPCIONAL] - Conteúdo do _cert.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
+  - `key` `<Buffer | String>` - [OPCIONAL] - Conteúdo do _key.pem_. Essa propriedade fica obrigatória se o `pfx` não for informado.
+  - `cUFAutor` `<String>` - [OBRIGATÓRIO] - Código da UF do autor. Consulte a tabela [códigos UF](#códigos-uf).
+  - `cnpj` `<String>` - [OPCIONAL] - CNPJ do interessado no DF-e. Se não informado um CNPJ, será obrigatório informar um CPF.
+  - `cpf` `<String>` - [OPCIONAL] - CPF do interessado no DF-e. Se não informado um CPF, será obrigatório informar um CNPJ.
+  - `tpAmb` `<String>` - [OBRIGATÓRIO] - Identificação de Ambiente. Informar `'1'` para **Produção** ou `'2'` para **Homologação**.
+  - `options` `<Object>` - [OPCIONAL]
+    - `requestOptions` `<AxiosRequestConfig>` - [OPCIONAL]
+    - `httpsOptions` `<AgentOptions>` - [OPCIONAL]
+
+### Consulta por ultNSU
+
+| Campo    |   Tipo   | Tamanho | Descrição                      |
+| :------- | :------: | :-----: | :----------------------------- |
+| `ultNSU` | _string_ |  1-15   | Último NSU recebido pelo ator. |
+
+#### Exemplo
+
+```js
+const { DistribuicaoCTe } = require('node-mde')
+const fs = require('fs')
+
+const distribuicao = new DistribuicaoCTe({
+  pfx: fs.readFileSync('./certificado.pfx'),
+  passphrase: 'senha',
+  cnpj: '12345678901234',
+  cUFAutor: '41',
+  tpAmb: '2',
+})
+
+const consulta = await distribuicao.consultaUltNSU('000000000000000')
+
+if (consulta.error) {
+  throw new Error(consulta.error)
+}
+
+console.log(consulta)
+// {
+//   "data": {
+//     "tpAmb": "1",
+//     "verAplic": "2.0.5_2408061805",
+//     "cStat": "138",
+//     "xMotivo": "documento localizado.",
+//     "dhResp": "2024-08-06T18:05:09",
+//     "ultNSU": "000000000002211",
+//     "maxNSU": "000000000002244",
+//     "docZip": [
+//       {
+//         "xml": "<cteProc versao=\"4.00\" ... </cteProc>",
+//         "json": { "cteProc": { ... }},
+//         "nsu": "000000000000001",
+//         "schema": "procCTe_v4.00.xsd"
+//       },
+//       {
+//         "xml": "<procEventoCTe versao=\"4.00\" ... </procEventoCTe>",
+//         "json": { "procEventoCTe": { ... }},
+//         "nsu": "00000000000002",
+//         "schema": "procEventoCTe_v4.00.xsd"
+//       }
+//     ]
+//   },
+//   "status": 200,
+//   "reqXml": "<soap:Envelope ... </soap:Envelope>",
+//   "resXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope ... </soap:Envelope>"
+// }
+```
+
+### Consulta por chCTe
+
+| Campo   |   Tipo   | Tamanho | Descrição                   |
+| :------ | :------: | :-----: | :-------------------------- |
+| `chCTe` | _string_ |   44    | Chave de acesso específica. |
+
+#### Exemplo
+
+```js
+const { DistribuicaoCTe } = require('node-mde')
+const fs = require('fs')
+
+const distribuicao = new DistribuicaoCTe({
+  pfx: fs.readFileSync('./certificado.pfx'),
+  passphrase: 'senha',
+  cnpj: '12345678901234',
+  cUFAutor: '41',
+  tpAmb: '2',
+})
+
+const consulta = await distribuicao.consultaChCTe(
+  '41000000000000000000000000000000000000000039'
+)
+
+if (consulta.error) {
+  throw new Error(consulta.error)
+}
+
+console.log(consulta)
+// {
+//   "data": {
+//     "tpAmb": "1",
+//     "verAplic": "2.0.5_2408061805",
+//     "cStat": "138",
+//     "xMotivo": "documento localizado.",
+//     "dhResp": "2024-08-06T18:05:09",
+//     "ultNSU": "000000000002211",
+//     "maxNSU": "000000000002244",
+//     "docZip": [
+//       {
+//         "xml": "<cteProc versao=\"4.00\" ... </cteProc>",
+//         "json": { "cteProc": { ... }},
+//         "nsu": "000000000000001",
+//         "schema": "procCTe_v4.00.xsd"
+//       }
+//     ]
+//   },
+//   "status": 200,
+//   "reqXml": "<soap:Envelope ... </soap:Envelope>",
+//   "resXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope ... </soap:Envelope>"
+// }
+```
+
+### Consulta por NSU
+
+| Campo |   Tipo   | Tamanho | Descrição                           |
+| :---- | :------: | :-----: | :---------------------------------- |
+| `NSU` | _string_ |  1-15   | Número Sequencial Único específico. |
+
+#### Exemplo
+
+```js
+const { DistribuicaoCTe } = require('node-mde')
+const fs = require('fs')
+
+const distribuicao = new DistribuicaoCTe({
+  pfx: fs.readFileSync('./certificado.pfx'),
+  passphrase: 'senha',
+  cnpj: '12345678901234',
+  cUFAutor: '41',
+  tpAmb: '2',
+})
+
+const consulta = await distribuicao.consultaNSU('000000000000001')
+
+if (consulta.error) {
+  throw new Error(consulta.error)
+}
+
+console.log(consulta)
+// {
+//   "data": {
+//     "tpAmb": "1",
+//     "verAplic": "2.0.5_2408061805",
+//     "cStat": "138",
+//     "xMotivo": "documento localizado.",
+//     "dhResp": "2024-08-06T18:05:09",
+//     "ultNSU": "000000000002211",
+//     "maxNSU": "000000000002244",
+//     "docZip": [
+//       {
+//         "xml": "<cteProc versao=\"4.00\" ... </cteProc>",
+//         "json": { "cteProc": { ... }},
+//         "nsu": "000000000000001",
+//         "schema": "procCTe_v4.00.xsd"
+//       }
+//     ]
+//   },
+//   "status": 200,
+//   "reqXml": "<soap:Envelope ... </soap:Envelope>",
+//   "resXml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope ... </soap:Envelope>"
+// }
+```
+
+## Manifestação do Destinatário (NF-e)
 
 ### Construtor
 
