@@ -1,6 +1,6 @@
 'use strict'
 
-class DistribuicaoSchema {
+class DistribuicaoCTeSchema {
   static montarSchema(options) {
     const distDFeInt = {
       tpAmb: options.tpAmb,
@@ -18,7 +18,7 @@ class DistribuicaoSchema {
         ['ultNSU']: options.ultNSU,
       }
     } else if (options.chNFe) {
-      distDFeInt['consChNFe'] = {
+      distDFeInt['consChCTe'] = {
         ['chNFe']: options.chNFe,
       }
     } else {
@@ -27,18 +27,18 @@ class DistribuicaoSchema {
       }
     }
 
-    distDFeInt['@_xmlns'] = 'http://www.portalfiscal.inf.br/nfe'
-    distDFeInt['@_versao'] = '1.01'
+    distDFeInt['@_versao'] = '1.00'
+    distDFeInt['@_xmlns'] = 'http://www.portalfiscal.inf.br/cte'
 
     return {
-      nfeDistDFeInteresse: {
-        nfeDadosMsg: {
+      cteDistDFeInteresse: {
+        cteDadosMsg: {
           distDFeInt: distDFeInt,
         },
-        '@_xmlns': 'http://www.portalfiscal.inf.br/nfe/wsdl/NFeDistribuicaoDFe',
+        '@_xmlns': 'http://www.portalfiscal.inf.br/cte/wsdl/CTeDistribuicaoDFe',
       },
     }
   }
 }
 
-module.exports = Object.freeze(DistribuicaoSchema)
+module.exports = Object.freeze(DistribuicaoCTeSchema)

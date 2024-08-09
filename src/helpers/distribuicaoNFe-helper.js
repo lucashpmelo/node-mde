@@ -1,11 +1,11 @@
 'use strict'
 
-const { CA, DISTRIBUICAO } = require('../env')
-const { DistribuicaoSchema } = require('../schemas')
+const { CA, DISTRIBUICAONFE } = require('../env')
+const { DistribuicaoNFeSchema } = require('../schemas')
 const SefazService = require('../services/sefaz-service')
 const { Gzip, Xml } = require('../util')
 
-class DistribuicaoHelper {
+class DistribuicaoNFeHelper {
   /**
    *
    * @param {string} data
@@ -13,7 +13,7 @@ class DistribuicaoHelper {
    * @returns
    */
   static async enviarConsulta(data, opts) {
-    const baseURL = DISTRIBUICAO[opts.tpAmb]
+    const baseURL = DISTRIBUICAONFE[opts.tpAmb]
     const options = {
       method: 'POST',
       data: data,
@@ -39,7 +39,7 @@ class DistribuicaoHelper {
    * @returns {string}
    */
   static montarRequest(opts) {
-    const schema = DistribuicaoSchema.montarSchema(opts)
+    const schema = DistribuicaoNFeSchema.montarSchema(opts)
     const xml = Xml.jsonToXml(schema)
     const data = Xml.envelopar(xml)
 
@@ -57,7 +57,10 @@ class DistribuicaoHelper {
     const json = Xml.xmlToJson(data)
 
     if (json.error) {
-      retorno['error'] = json.error
+      retorno['error'] = {
+        xml: json.error,
+        json: Xml.xmlToJson(json.error),
+      }
     }
 
     const {
@@ -107,4 +110,4 @@ class DistribuicaoHelper {
   }
 }
 
-module.exports = Object.freeze(DistribuicaoHelper)
+module.exports = Object.freeze(DistribuicaoNFeHelper)

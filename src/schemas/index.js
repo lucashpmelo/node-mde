@@ -1,10 +1,12 @@
 'use strict'
 
-const DistribuicaoSchema = require('./distribuicaoDFe-schema')
+const DistribuicaoNFeSchema = require('./distribuicaoNFe-schema')
+const DistribuicaoCTeSchema = require('./distribuicaoCTe-schema')
 const RecepcaoSchema = require('./recepcaoEvento-schema')
 
 const schema = Object.freeze({
-  DistribuicaoSchema,
+  DistribuicaoNFeSchema,
+  DistribuicaoCTeSchema,
   RecepcaoSchema,
 })
 

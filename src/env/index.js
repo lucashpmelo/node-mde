@@ -1,5 +1,5 @@
 const { CA } = require('./ca')
-const { DISTRIBUICAO } = require('./distribuicao')
+const { DISTRIBUICAONFE, DISTRIBUICAOCTE } = require('./distribuicao')
 const { EVENTOS } = require('./evento')
 const { RECEPCAO } = require('./recepcao')
 const { CODIGOS_UF } = require('./uf')
@@ -9,7 +9,8 @@ const { ZONES } = require('./zone')
 module.exports = {
   CA: CA,
   CODIGOS_UF: CODIGOS_UF,
-  DISTRIBUICAO: DISTRIBUICAO,
+  DISTRIBUICAONFE,
+  DISTRIBUICAOCTE,
   EVENTOS: EVENTOS,
   RECEPCAO: RECEPCAO,
   VERSION: VERSION,

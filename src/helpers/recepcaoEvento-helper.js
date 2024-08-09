@@ -74,7 +74,10 @@ class RecepcaoHelper {
     const json = Xml.xmlToJson(data)
 
     if (json.error) {
-      retorno['error'] = json.error
+      retorno['error'] = {
+        xml: json.error,
+        json: Xml.xmlToJson(json.error),
+      }
     }
 
     const {
