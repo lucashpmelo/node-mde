@@ -24,6 +24,7 @@ class DistribuicaoHelper {
       ca: CA,
       cert: opts.cert,
       key: opts.key,
+      tpAmb: opts.tpAmb,
       requestOptions: opts.requestOptions,
       httpsOptions: opts.httpsOptions,
     })

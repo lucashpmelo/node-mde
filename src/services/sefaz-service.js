@@ -9,6 +9,13 @@ class Instance {
   constructor(opts) {
     const { baseURL, ca, cert, key } = opts
 
+    if (
+      opts.tpAmb === '1' &&
+      'rejectUnauthorized' in opts.httpsOptions === false
+    ) {
+      opts.httpsOptions['rejectUnauthorized'] = false
+    }
+
     const AgentOptions = Object.assign(
       {
         cert: cert,

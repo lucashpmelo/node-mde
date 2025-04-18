@@ -2,6 +2,8 @@
 
 ## [Não publicado]
 
+- Ambiente de Produção retornando `unable to get local issuer certificate`
+
 ## [0.14.11] / 2025-03-18
 
 ### Segurança

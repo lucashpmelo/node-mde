@@ -13,7 +13,8 @@ const certificado = {
 describe('SefazService', function () {
   describe('#request()', function () {
     it('NFeDistribuicaoDFe sem informar a Cadeia de Certificados', async function () {
-      const baseURL = DISTRIBUICAO['2']
+      const tpAmb = '2'
+      const baseURL = DISTRIBUICAO[tpAmb]
       const requestOptions = {}
       const httpsOptions = {}
 
@@ -35,7 +36,8 @@ describe('SefazService', function () {
     })
 
     it('NFeDistribuicaoDFe sem informar cert.pem e key.pem', async function () {
-      const baseURL = DISTRIBUICAO['2']
+      const tpAmb = '2'
+      const baseURL = DISTRIBUICAO[tpAmb]
       const requestOptions = {}
       const httpsOptions = {}
 
@@ -53,8 +55,9 @@ describe('SefazService', function () {
       assert.equal(retorno.status, 403)
     })
 
-    it('NFeDistribuicaoDFe', async function () {
-      const baseURL = DISTRIBUICAO['2']
+    it('NFeDistribuicaoDFe tpAmb = "1"', async function () {
+      const tpAmb = '1'
+      const baseURL = DISTRIBUICAO[tpAmb]
       const requestOptions = {}
       const httpsOptions = {}
 
@@ -63,6 +66,30 @@ describe('SefazService', function () {
         ca: CA,
         cert: certificado.cert,
         key: certificado.key,
+        tpAmb: tpAmb,
+        requestOptions: requestOptions,
+        httpsOptions: httpsOptions,
+      })
+
+      const config = { method: 'GET' }
+
+      const retorno = await client.request(config)
+
+      assert.equal(retorno.status, 200)
+    })
+
+    it('NFeDistribuicaoDFe tpAmb = "2"', async function () {
+      const tpAmb = '2'
+      const baseURL = DISTRIBUICAO[tpAmb]
+      const requestOptions = {}
+      const httpsOptions = {}
+
+      const client = new SefazService({
+        baseURL: baseURL,
+        ca: CA,
+        cert: certificado.cert,
+        key: certificado.key,
+        tpAmb: tpAmb,
         requestOptions: requestOptions,
         httpsOptions: httpsOptions,
       })
@@ -75,7 +102,8 @@ describe('SefazService', function () {
     })
 
     it('NFeRecepcaoEvento4 sem informar a Cadeia de Certificados', async function () {
-      const baseURL = RECEPCAO['2']
+      const tpAmb = '2'
+      const baseURL = RECEPCAO[tpAmb]
       const requestOptions = {}
       const httpsOptions = {}
 
@@ -97,7 +125,8 @@ describe('SefazService', function () {
     })
 
     it('NFeRecepcaoEvento4 sem informar cert.pem e key.pem', async function () {
-      const baseURL = RECEPCAO['2']
+      const tpAmb = '2'
+      const baseURL = RECEPCAO[tpAmb]
       const requestOptions = {}
       const httpsOptions = {}
 
@@ -115,8 +144,9 @@ describe('SefazService', function () {
       assert.equal(retorno.status, 403)
     })
 
-    it('NFeRecepcaoEvento4', async function () {
-      const baseURL = RECEPCAO['2']
+    it('NFeRecepcaoEvento4 tpAmb = "1"', async function () {
+      const tpAmb = '1'
+      const baseURL = RECEPCAO[tpAmb]
       const requestOptions = {}
       const httpsOptions = {}
 
@@ -125,6 +155,30 @@ describe('SefazService', function () {
         ca: CA,
         cert: certificado.cert,
         key: certificado.key,
+        tpAmb: tpAmb,
+        requestOptions: requestOptions,
+        httpsOptions: httpsOptions,
+      })
+
+      const config = { method: 'GET' }
+
+      const retorno = await client.request(config)
+
+      assert.equal(retorno.status, 200)
+    })
+
+    it('NFeRecepcaoEvento4 tpAmb = "2"', async function () {
+      const tpAmb = '2'
+      const baseURL = RECEPCAO[tpAmb]
+      const requestOptions = {}
+      const httpsOptions = {}
+
+      const client = new SefazService({
+        baseURL: baseURL,
+        ca: CA,
+        cert: certificado.cert,
+        key: certificado.key,
+        tpAmb: tpAmb,
         requestOptions: requestOptions,
         httpsOptions: httpsOptions,
       })
