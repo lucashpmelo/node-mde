@@ -2,6 +2,12 @@
 
 ## [Não publicado]
 
+## [0.14.14] / 2026-06-21
+
+### Segurança
+
+- Atualizado `fast-xml-parser` de `4.5.3` para `5.9.3`, corrigindo as falhas críticas de expansão de entidades em DOCTYPE (GHSA-jmr7-xgp7-cmfj, GHSA-m7jm-9gc2-mpf2 e GHSA-8gc5-j5rx-235r). Sem mudança de comportamento: as opções do `XMLParser`/`XMLBuilder` mantêm os mesmos padrões na v5
+
 ## [0.14.13] / 2025-04-23
 
 - Node lançando erro `TypeError: Cannot add property rejectUnauthorized, object is not extensible` #22
@@ -325,7 +331,8 @@
   - 210220 - Desconhecimento da Operação
   - 210240 - Operação não Realizada
 
-[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.13..HEAD
+[não publicado]: https://github.com/lucashpmelo/node-mde/compare/0.14.14..HEAD
+[0.14.14]: https://github.com/lucashpmelo/node-mde/compare/0.14.13...0.14.14
 [0.14.13]: https://github.com/lucashpmelo/node-mde/compare/0.14.12...0.14.13
 [0.14.12]: https://github.com/lucashpmelo/node-mde/compare/0.14.11...0.14.12
 [0.14.11]: https://github.com/lucashpmelo/node-mde/compare/0.14.10...0.14.11
